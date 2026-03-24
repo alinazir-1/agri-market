@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../Core/Constant/colors.dart';
 import '../../../Core/Constant/sizes.dart';
+import '../../../Core/Theme/app_theme.dart';
 import '../../../Shared/Screens Common Widgets/grade_pill.dart';
+import '../../../Shared/Screens Common Widgets/screen_top_bar.dart';
 import '../../../Shared/Screens Common Widgets/status_pill.dart';
 import 'Inventory Widgets/inv_activity_item.dart';
 import 'Inventory Widgets/inv_alert_card.dart';
@@ -22,18 +24,24 @@ class InventoryScr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: context.appBg,
       body: SafeArea(
         child: Column(
           children: [
-            _topBar(),
-            _summaryCards(),
+            ScreenTopBar(
+              title: 'Inventory & Stock',
+              subtitle: 'Monitor and manage your product stock levels',
+              searchController: c.searchController,
+              onSearch: c.onSearch,
+              searchHint: 'Search products...',
+            ),
+            _summaryCards(context),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: _tableSection()),
-                  _sidebar(),
+                  Expanded(child: _tableSection(context)),
+                  _sidebar(context),
                 ],
               ),
             ),
@@ -44,122 +52,14 @@ class InventoryScr extends StatelessWidget {
   }
 
   // ════════════════════════════════════════════════════════════════════════════
-  //  TOP BAR
-  // ════════════════════════════════════════════════════════════════════════════
-
-  Widget _topBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-          horizontal: CSize.space20, vertical: CSize.space12),
-      decoration: const BoxDecoration(
-          color: CColors.backGroundWhite,
-          border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0)))),
-      child: Row(
-        children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Inventory & Stock',
-                  style: TextStyle(
-                      fontSize: CSize.font24Large,
-                      fontWeight: FontWeight.w900,
-                      color: CColors.textPrimary)),
-              SizedBox(height: CSize.space2),
-              Text('Monitor and manage your product stock levels',
-                  style: TextStyle(
-                      fontSize: CSize.font10XSmall,
-                      color: CColors.textSecondary)),
-            ],
-          ),
-          const SizedBox(width: CSize.space20),
-          SizedBox(
-            width: 280,
-            height: 36,
-            child: TextField(
-              controller: c.searchController,
-              onChanged: c.onSearch,
-              style: const TextStyle(fontSize: 11, color: CColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: 'Search products...',
-                hintStyle:
-                    const TextStyle(fontSize: 11, color: CColors.textSecondary),
-                prefixIcon: const Icon(Icons.search,
-                    size: CSize.icon16Small, color: CColors.iconEmeraldGreen),
-                filled: true,
-                fillColor: const Color(0xFFF8FAFC),
-                isDense: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: CSize.space10),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(
-                        color: CColors.borderEmeraldGreen,
-                        width: CSize.borderWidth1)),
-              ),
-            ),
-          ),
-          const Spacer(),
-          Stack(children: [
-            Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                    color: CColors.backGroundWhite,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFFE2E8F0))),
-                child: const Icon(Icons.notifications_none_rounded,
-                    size: CSize.icon16Small, color: CColors.iconEmeraldGreen)),
-            Positioned(
-                top: 4,
-                right: 4,
-                child: Container(
-                    width: 7,
-                    height: 7,
-                    decoration: BoxDecoration(
-                        color: CColors.notificationDot,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: CColors.backGroundWhite, width: 1.5)))),
-          ]),
-          const SizedBox(width: CSize.space8),
-          Container(
-              width: 34,
-              height: 34,
-              decoration: BoxDecoration(
-                  color: CColors.backGroundWhite,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFFE2E8F0))),
-              child: const Icon(Icons.messenger_outline_rounded,
-                  size: CSize.icon16Small, color: CColors.iconEmeraldGreen)),
-          const SizedBox(width: CSize.space8),
-          const CircleAvatar(
-              radius: 17,
-              backgroundColor: CColors.backGroundEmeraldGreen,
-              child: Text('AS',
-                  style: TextStyle(
-                      fontSize: CSize.font10XSmall,
-                      fontWeight: FontWeight.w800,
-                      color: CColors.textWhite))),
-        ],
-      ),
-    );
-  }
-
-  // ════════════════════════════════════════════════════════════════════════════
   //  SUMMARY CARDS
   // ════════════════════════════════════════════════════════════════════════════
 
-  Widget _summaryCards() {
+  Widget _summaryCards(BuildContext context) {
     return Obx(() => Container(
           padding: const EdgeInsets.symmetric(
               horizontal: CSize.space20, vertical: CSize.space14),
-          color: const Color(0xFFF8FAFC),
+          color: context.appBg,
           child: Row(
             children: [
               Expanded(
@@ -233,31 +133,31 @@ class InventoryScr extends StatelessWidget {
   //  TABLE SECTION
   // ════════════════════════════════════════════════════════════════════════════
 
-  Widget _tableSection() {
+  Widget _tableSection(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          border: Border(right: BorderSide(color: Color(0xFFE2E8F0)))),
+      decoration: BoxDecoration(
+          border: Border(right: BorderSide(color: context.borderClr))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _tableHeader(),
-          Expanded(child: _table()),
+          _tableHeader(context),
+          Expanded(child: _table(context)),
         ],
       ),
     );
   }
 
-  Widget _tableHeader() {
+  Widget _tableHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
           CSize.space20, CSize.space14, CSize.space20, CSize.space12),
       child: Row(
         children: [
-          const Text('Stock Overview',
+          Text('Stock Overview',
               style: TextStyle(
                   fontSize: CSize.font13Small,
                   fontWeight: FontWeight.w800,
-                  color: CColors.textPrimary)),
+                  color: context.txtPrimary)),
           const Spacer(),
           Obx(() => Wrap(
                 spacing: CSize.space5,
@@ -308,18 +208,18 @@ class InventoryScr extends StatelessWidget {
     );
   }
 
-  Widget _table() {
+  Widget _table(BuildContext context) {
     return Obx(() {
       final list = c.filteredItems;
       if (list.isEmpty) {
-        return const Center(
+        return Center(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Icon(Icons.inventory_2_outlined,
-                size: CSize.icon36XLarge, color: CColors.textSecondary),
-            SizedBox(height: CSize.space12),
+                size: CSize.icon36XLarge, color: context.txtSecondary),
+            const SizedBox(height: CSize.space12),
             Text('No products found',
                 style: TextStyle(
-                    fontSize: CSize.font13Small, color: CColors.textSecondary)),
+                    fontSize: CSize.font13Small, color: context.txtSecondary)),
           ]),
         );
       }
@@ -339,46 +239,46 @@ class InventoryScr extends StatelessWidget {
           children: [
             // Header row
             TableRow(
-              decoration: const BoxDecoration(color: Color(0xFFF8FAFC)),
+              decoration: BoxDecoration(color: context.cardBg2),
               children: [
-                _th('Product'),
-                _th('Type'),
-                _th('Grade'),
-                _th('Status'),
-                _th('Stock Level'),
-                _th('Sold / Booked'),
-                _th('Unit Price'),
-                _th('Actions'),
+                _th('Product', context),
+                _th('Type', context),
+                _th('Grade', context),
+                _th('Status', context),
+                _th('Stock Level', context),
+                _th('Sold / Booked', context),
+                _th('Unit Price', context),
+                _th('Actions', context),
               ],
             ),
             // Data rows
-            ...list.map((item) => _tableRow(item)),
+            ...list.map((item) => _tableRow(item, context)),
           ],
         ),
       );
     });
   }
 
-  Widget _th(String label) {
+  Widget _th(String label, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: CSize.space8, vertical: CSize.space10),
       child: Text(
         label.toUpperCase(),
-        style: const TextStyle(
+        style: TextStyle(
             fontSize: 9,
             fontWeight: FontWeight.w800,
-            color: CColors.textSecondary,
+            color: context.txtSecondary,
             letterSpacing: 0.5),
       ),
     );
   }
 
-  TableRow _tableRow(InventoryItem item) {
+  TableRow _tableRow(InventoryItem item, BuildContext context) {
     return TableRow(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           border:
-              Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 0.5))),
+              Border(bottom: BorderSide(color: context.dividerClr, width: 0.5))),
       children: [
         // Product
         Padding(
@@ -408,15 +308,15 @@ class InventoryScr extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                     Text(item.name,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
-                            color: CColors.textPrimary),
+                            color: context.txtPrimary),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis),
                     Text(item.category,
-                        style: const TextStyle(
-                            fontSize: 9, color: CColors.textSecondary)),
+                        style: TextStyle(
+                            fontSize: 9, color: context.txtSecondary)),
                   ])),
             ],
           ),
@@ -473,8 +373,8 @@ class InventoryScr extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           color: color)),
                   Text('$pct% sold',
-                      style: const TextStyle(
-                          fontSize: 9, color: CColors.textSecondary)),
+                      style: TextStyle(
+                          fontSize: 9, color: context.txtSecondary)),
                 ]);
           }),
         ),
@@ -484,10 +384,10 @@ class InventoryScr extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
               horizontal: CSize.space8, vertical: CSize.space10),
           child: Text('\$${item.price.toStringAsFixed(0)}/${item.unit}',
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: CColors.textPrimary)),
+                  color: context.txtPrimary)),
         ),
 
         // Actions
@@ -575,7 +475,7 @@ class InventoryScr extends StatelessWidget {
   //  SIDEBAR
   // ════════════════════════════════════════════════════════════════════════════
 
-  Widget _sidebar() {
+  Widget _sidebar(BuildContext context) {
     return SizedBox(
       width: 280,
       child: SingleChildScrollView(
@@ -583,16 +483,16 @@ class InventoryScr extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _sidebarAlerts(),
+            _sidebarAlerts(context),
             const SizedBox(height: CSize.space20),
-            _sidebarActivity(),
+            _sidebarActivity(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _sidebarAlerts() {
+  Widget _sidebarAlerts(BuildContext context) {
     return Obx(() {
       final alerts = c.alerts;
       return Column(
@@ -602,11 +502,11 @@ class InventoryScr extends StatelessWidget {
             const Icon(Icons.warning_amber_rounded,
                 size: CSize.icon16Small, color: CColors.textError),
             const SizedBox(width: CSize.space5),
-            const Text('Stock Alerts',
+            Text('Stock Alerts',
                 style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
-                    color: CColors.textPrimary)),
+                    color: context.txtPrimary)),
             const SizedBox(width: CSize.space5),
             if (alerts.isNotEmpty)
               Container(
@@ -653,19 +553,19 @@ class InventoryScr extends StatelessWidget {
     });
   }
 
-  Widget _sidebarActivity() {
+  Widget _sidebarActivity(BuildContext context) {
     return Obx(() => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(children: [
-              Icon(Icons.timeline_rounded,
+            Row(children: [
+              const Icon(Icons.timeline_rounded,
                   size: CSize.icon16Small, color: CColors.iconEmeraldGreen),
-              SizedBox(width: CSize.space5),
+              const SizedBox(width: CSize.space5),
               Text('Recent Activity',
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
-                      color: CColors.textPrimary)),
+                      color: context.txtPrimary)),
             ]),
             const SizedBox(height: CSize.space10),
             ...c.activityLog.map((entry) => InvActivityItem(entry: entry)),

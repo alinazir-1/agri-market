@@ -1,160 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../../../Core/Constant/colors.dart';
-import '../../../../Core/Constant/sizes.dart';
+import '../../../../Shared/Screens Common Widgets/screen_top_bar.dart';
 import '../customers_con.dart';
 
+/// Thin wrapper so existing [CustomersScr] code stays unchanged.
+/// Delegates to the shared [ScreenTopBar].
 class TopBar extends StatelessWidget {
   final CustomersCon c;
   const TopBar({super.key, required this.c});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: CColors.backGroundWhite,
-        border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: CSize.space20,
-        vertical: CSize.space12,
-      ),
-      child: Row(
-        children: [
-          // Title
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Customers',
-                style: TextStyle(
-                  fontSize: CSize.font24Large,
-                  fontWeight: FontWeight.w900,
-                  color: CColors.textPrimary,
-                ),
-              ),
-              SizedBox(height: CSize.space2),
-              Text(
-                'Manage your buyer relationships',
-                style: TextStyle(
-                  fontSize: CSize.font10XSmall,
-                  color: CColors.textSecondary,
-                ),
-              ),
-            ],
-          ),
-
-          const SizedBox(width: CSize.space20),
-
-          // Search — gray fill
-          SizedBox(
-            width: 280,
-            height: 36,
-            child: TextField(
-              controller: c.searchController,
-              onChanged: c.onSearch,
-              style: const TextStyle(fontSize: 11, color: CColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: 'Search by name, email...',
-                hintStyle:
-                    const TextStyle(fontSize: 11, color: CColors.textSecondary),
-                prefixIcon: const Icon(
-                  Icons.search,
-                  size: CSize.icon16Small,
-                  color: CColors.iconEmeraldGreen,
-                ),
-                filled: true,
-                fillColor: CColors.backGroundLightGrey,
-                isDense: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: CSize.space10),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(
-                    color: CColors.borderEmeraldGreen,
-                    width: CSize.borderWidth1,
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          const Spacer(),
-
-          // Notification
-          Stack(children: [
-            Container(
-              width: 34,
-              height: 34,
-              decoration: BoxDecoration(
-                color: CColors.backGroundWhite,
-                shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-              ),
-              child: const Icon(
-                Icons.notifications_none_rounded,
-                size: CSize.icon16Small,
-                color: CColors.iconEmeraldGreen,
-              ),
-            ),
-            Positioned(
-              top: 4,
-              right: 4,
-              child: Container(
-                width: 7,
-                height: 7,
-                decoration: BoxDecoration(
-                  color: CColors.notificationDot,
-                  shape: BoxShape.circle,
-                  border:
-                      Border.all(color: CColors.backGroundWhite, width: 1.5),
-                ),
-              ),
-            ),
-          ]),
-
-          const SizedBox(width: CSize.space8),
-
-          // Message
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: CColors.backGroundWhite,
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFE2E8F0)),
-            ),
-            child: const Icon(
-              Icons.messenger_outline_rounded,
-              size: CSize.icon16Small,
-              color: CColors.iconEmeraldGreen,
-            ),
-          ),
-
-          const SizedBox(width: CSize.space8),
-
-          // Avatar
-          const CircleAvatar(
-            radius: 17,
-            backgroundColor: CColors.backGroundEmeraldGreen,
-            child: Text(
-              'AS',
-              style: TextStyle(
-                fontSize: CSize.font10XSmall,
-                fontWeight: FontWeight.w800,
-                color: CColors.textWhite,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ScreenTopBar(
+        title: 'Customers',
+        subtitle: 'Manage your buyer relationships',
+        searchController: c.searchController,
+        onSearch: c.onSearch,
+        searchHint: 'Search by name, email...',
+      );
 }

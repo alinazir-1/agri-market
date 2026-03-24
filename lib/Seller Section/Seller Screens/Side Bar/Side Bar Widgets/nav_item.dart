@@ -11,26 +11,24 @@ class NavItemWidget extends StatelessWidget {
   const NavItemWidget({
     super.key,
     required this.item,
-    required this.index,
     required this.c,
     required this.isCollapsed,
   });
 
   final NavItem item;
-  final int index;
   final SellerSideBarCon c;
   final bool isCollapsed;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final isActive = c.selectedIndex.value == index;
+      final isActive = c.selectedIndex.value == item.screenIndex;
 
       return Tooltip(
         message: isCollapsed ? item.title : '',
         preferBelow: false,
         child: GestureDetector(
-          onTap: () => c.changeScreen(index),
+          onTap: () => c.changeScreen(item.screenIndex),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 150),
             height: 44,
@@ -78,7 +76,6 @@ class NavItemWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Active indicator dot
                   if (isActive)
                     Container(
                       width: 6,

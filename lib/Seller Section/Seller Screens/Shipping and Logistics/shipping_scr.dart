@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../Core/Constant/colors.dart';
 import '../../../Core/Constant/sizes.dart';
+import '../../../Core/Theme/app_theme.dart';
 import '../../../Data/Models/Shipping & Logistics Model/shipping_model.dart';
+import '../../../Shared/Screens Common Widgets/screen_top_bar.dart';
 import 'Shipping & Logistics Widgets/all_widgets.dart';
 
 class ShippingScr extends StatelessWidget {
@@ -13,11 +15,18 @@ class ShippingScr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: context.appBg,
       body: SafeArea(
         child: Column(
           children: [
-            _TopBar(shippingController: shippingController),
+            ScreenTopBar(
+              title: 'Shipping & Logistics',
+              subtitle: 'Manage shipments and delivery partners',
+              searchController: shippingController.searchController,
+              onSearch: shippingController.onSearch,
+              searchHint: 'Search orders, tracking...',
+              searchWidth: 300,
+            ),
             _TabBar(shippingController: shippingController),
             Expanded(
               child: Obx(() =>
@@ -27,121 +36,6 @@ class ShippingScr extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  FILE: shipping_top_bar.dart
-// ─────────────────────────────────────────────────────────────────────────────
-
-class _TopBar extends StatelessWidget {
-  final ShippingCon shippingController;
-  const _TopBar({required this.shippingController});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: CColors.backGroundWhite,
-        border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
-      ),
-      padding: const EdgeInsets.symmetric(
-          horizontal: CSize.space20, vertical: CSize.space12),
-      child: Row(
-        children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Shipping & Logistics',
-                  style: TextStyle(
-                      fontSize: CSize.font24Large,
-                      fontWeight: FontWeight.w900,
-                      color: CColors.textPrimary)),
-              SizedBox(height: CSize.space2),
-              Text('Manage shipments and delivery partners',
-                  style: TextStyle(
-                      fontSize: CSize.font10XSmall,
-                      color: CColors.textSecondary)),
-            ],
-          ),
-          const SizedBox(width: CSize.space20),
-          SizedBox(
-            width: 300,
-            height: 36,
-            child: TextField(
-              controller: shippingController.searchController,
-              onChanged: shippingController.onSearch,
-              style: const TextStyle(fontSize: 11, color: CColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: 'Search orders, tracking...',
-                hintStyle:
-                    const TextStyle(fontSize: 11, color: CColors.textSecondary),
-                prefixIcon: const Icon(Icons.search,
-                    size: CSize.icon16Small, color: CColors.iconEmeraldGreen),
-                filled: true,
-                fillColor: CColors.backGroundLightGrey,
-                isDense: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: CSize.space10),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(
-                        color: CColors.borderEmeraldGreen,
-                        width: CSize.borderWidth1)),
-              ),
-            ),
-          ),
-          const Spacer(),
-          Stack(children: [
-            Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                    color: CColors.backGroundWhite,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFFE2E8F0))),
-                child: const Icon(Icons.notifications_none_rounded,
-                    size: CSize.icon16Small, color: CColors.iconEmeraldGreen)),
-            Positioned(
-                top: 4,
-                right: 4,
-                child: Container(
-                    width: 7,
-                    height: 7,
-                    decoration: BoxDecoration(
-                        color: CColors.notificationDot,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: CColors.backGroundWhite, width: 1.5)))),
-          ]),
-          const SizedBox(width: CSize.space8),
-          Container(
-              width: 34,
-              height: 34,
-              decoration: BoxDecoration(
-                  color: CColors.backGroundWhite,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFFE2E8F0))),
-              child: const Icon(Icons.messenger_outline_rounded,
-                  size: CSize.icon16Small, color: CColors.iconEmeraldGreen)),
-          const SizedBox(width: CSize.space8),
-          const CircleAvatar(
-              radius: 17,
-              backgroundColor: CColors.backGroundEmeraldGreen,
-              child: Text('AS',
-                  style: TextStyle(
-                      fontSize: CSize.font10XSmall,
-                      fontWeight: FontWeight.w800,
-                      color: CColors.textWhite))),
-        ],
       ),
     );
   }
@@ -158,21 +52,21 @@ class _TabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          decoration: const BoxDecoration(
-            color: CColors.backGroundWhite,
-            border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
+          decoration: BoxDecoration(
+            color: context.cardBg,
+            border: Border(bottom: BorderSide(color: context.borderClr)),
           ),
           padding: const EdgeInsets.symmetric(horizontal: CSize.space20),
           child: Row(
             children: [
-              _tabItem('📦  Shipments', ShippingTab.shipments),
-              _tabItem('🚚  Delivery Partners', ShippingTab.deliveryPartners),
+              _tabItem('📦  Shipments', ShippingTab.shipments, context),
+              _tabItem('🚚  Delivery Partners', ShippingTab.deliveryPartners, context),
             ],
           ),
         ));
   }
 
-  Widget _tabItem(String label, ShippingTab tab) {
+  Widget _tabItem(String label, ShippingTab tab, BuildContext context) {
     final isActive = shippingController.activeTab.value == tab;
     return GestureDetector(
       onTap: () => shippingController.setTab(tab),
@@ -194,7 +88,7 @@ class _TabBar extends StatelessWidget {
           style: TextStyle(
             fontSize: CSize.font13Small,
             fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
-            color: isActive ? CColors.textEmeraldGreen : CColors.textSecondary,
+            color: isActive ? CColors.textEmeraldGreen : context.txtSecondary,
           ),
         ),
       ),
@@ -214,13 +108,13 @@ class _ShipmentsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _summaryCards(),
+        _summaryCards(context),
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: _tableSection()),
-              _sidebar(),
+              Expanded(child: _tableSection(context)),
+              _sidebar(context),
             ],
           ),
         ),
@@ -228,11 +122,11 @@ class _ShipmentsTab extends StatelessWidget {
     );
   }
 
-  Widget _summaryCards() {
+  Widget _summaryCards(BuildContext context) {
     return Obx(() => Container(
-          decoration: const BoxDecoration(
-            color: Color(0xFFF8FAFC),
-            border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
+          decoration: BoxDecoration(
+            color: context.cardBg2,
+            border: Border(bottom: BorderSide(color: context.borderClr)),
           ),
           padding: const EdgeInsets.symmetric(
               horizontal: CSize.space20, vertical: CSize.space14),
@@ -298,31 +192,31 @@ class _ShipmentsTab extends StatelessWidget {
         ));
   }
 
-  Widget _tableSection() {
+  Widget _tableSection(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(right: BorderSide(color: Color(0xFFE2E8F0))),
+      decoration: BoxDecoration(
+        border: Border(right: BorderSide(color: context.borderClr)),
       ),
       child: Column(
         children: [
-          _tableHeader(),
-          Expanded(child: _tableBody()),
+          _tableHeader(context),
+          Expanded(child: _tableBody(context)),
         ],
       ),
     );
   }
 
-  Widget _tableHeader() {
+  Widget _tableHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
           CSize.space20, CSize.space14, CSize.space20, CSize.space12),
       child: Row(
         children: [
-          const Text('Shipments',
+          Text('Shipments',
               style: TextStyle(
                   fontSize: CSize.font13Small,
                   fontWeight: FontWeight.w800,
-                  color: CColors.textPrimary)),
+                  color: context.txtPrimary)),
           const SizedBox(width: CSize.space12),
           Obx(() => Wrap(
                 spacing: CSize.space5,
@@ -396,17 +290,17 @@ class _ShipmentsTab extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: CSize.space12, vertical: CSize.space5),
                 decoration: BoxDecoration(
-                    color: CColors.backGroundWhite,
+                    color: context.cardBg,
                     borderRadius: BorderRadius.circular(CSize.radius10Medium),
-                    border: Border.all(color: const Color(0xFFE2E8F0))),
+                    border: Border.all(color: context.borderClr)),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<ShippingSort>(
                     value: shippingController.selectedSort.value,
                     isDense: true,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: CSize.font10XSmall,
                         fontWeight: FontWeight.w600,
-                        color: CColors.textPrimary),
+                        color: context.txtPrimary),
                     icon: const Icon(Icons.keyboard_arrow_down,
                         size: CSize.icon16Small,
                         color: CColors.iconEmeraldGreen),
@@ -456,18 +350,18 @@ class _ShipmentsTab extends StatelessWidget {
     'Actions',
   ];
 
-  Widget _tableBody() {
+  Widget _tableBody(BuildContext context) {
     return Obx(() {
       final list = shippingController.filteredShipments;
       if (list.isEmpty) {
-        return const Center(
+        return Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.local_shipping_outlined,
-              size: CSize.icon36XLarge, color: CColors.textSecondary),
-          SizedBox(height: CSize.space12),
+              size: CSize.icon36XLarge, color: context.txtSecondary),
+          const SizedBox(height: CSize.space12),
           Text('No shipments found',
               style: TextStyle(
-                  fontSize: CSize.font13Small, color: CColors.textSecondary)),
+                  fontSize: CSize.font13Small, color: context.txtSecondary)),
         ]));
       }
       return SingleChildScrollView(
@@ -476,33 +370,33 @@ class _ShipmentsTab extends StatelessWidget {
           columnWidths: _colWidths,
           children: [
             TableRow(
-              decoration: const BoxDecoration(color: Color(0xFFF8FAFC)),
+              decoration: BoxDecoration(color: context.cardBg2),
               children: _headers
                   .map((h) => Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: CSize.space8, vertical: CSize.space10),
                         child: Text(h.toUpperCase(),
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w800,
-                                color: CColors.textSecondary,
+                                color: context.txtSecondary,
                                 letterSpacing: 0.5)),
                       ))
                   .toList(),
             ),
-            ...list.map((s) => _buildRow(s)),
+            ...list.map((s) => _buildRow(s, context)),
           ],
         ),
       );
     });
   }
 
-  TableRow _buildRow(ShipmentModel s) {
+  TableRow _buildRow(ShipmentModel s, BuildContext context) {
     final bool isDelayed = s.isDelayed && s.estimatedDelivery != null;
     return TableRow(
-      decoration: const BoxDecoration(
-          border:
-              Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 0.5))),
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(color: context.dividerClr, width: 0.5))),
       children: [
         // Order
         Padding(
@@ -511,13 +405,13 @@ class _ShipmentsTab extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text('#${s.orderId}',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
-                      color: CColors.textPrimary)),
+                      color: context.txtPrimary)),
               Text(shippingController.formatDate(s.orderDate),
-                  style: const TextStyle(
-                      fontSize: 9, color: CColors.textSecondary)),
+                  style: TextStyle(
+                      fontSize: 9, color: context.txtSecondary)),
             ])),
 
         // Buyer
@@ -532,15 +426,15 @@ class _ShipmentsTab extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                     Text(s.buyerName,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
-                            color: CColors.textPrimary),
+                            color: context.txtPrimary),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis),
                     Text(s.buyerLocation,
-                        style: const TextStyle(
-                            fontSize: 9, color: CColors.textSecondary)),
+                        style: TextStyle(
+                            fontSize: 9, color: context.txtSecondary)),
                   ])),
             ])),
 
@@ -551,15 +445,15 @@ class _ShipmentsTab extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(s.productName,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
-                      color: CColors.textPrimary),
+                      color: context.txtPrimary),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis),
               Text('${s.quantity} ${s.unit}',
-                  style: const TextStyle(
-                      fontSize: 9, color: CColors.textSecondary)),
+                  style: TextStyle(
+                      fontSize: 9, color: context.txtSecondary)),
             ])),
 
         // Partner
@@ -580,12 +474,12 @@ class _ShipmentsTab extends StatelessWidget {
                         Text(
                             shippingController
                                 .deliveryMethodLabel(s.deliveryMethod),
-                            style: const TextStyle(
-                                fontSize: 9, color: CColors.textSecondary)),
+                            style: TextStyle(
+                                fontSize: 9, color: context.txtSecondary)),
                       ])
-                : const Text('Not assigned',
-                    style:
-                        TextStyle(fontSize: 10, color: CColors.textSecondary))),
+                : Text('Not assigned',
+                    style: TextStyle(
+                        fontSize: 10, color: context.txtSecondary))),
 
         // Tracking
         Padding(
@@ -597,9 +491,9 @@ class _ShipmentsTab extends StatelessWidget {
                         fontSize: 9,
                         fontWeight: FontWeight.w700,
                         color: CColors.textEmeraldGreen))
-                : const Text('—',
-                    style:
-                        TextStyle(fontSize: 10, color: CColors.textSecondary))),
+                : Text('—',
+                    style: TextStyle(
+                        fontSize: 10, color: context.txtSecondary))),
 
         // Progress
         Padding(
@@ -625,16 +519,16 @@ class _ShipmentsTab extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: isDelayed
                                 ? CColors.backGroundOrange
-                                : CColors.textPrimary)),
+                                : context.txtPrimary)),
                     if (isDelayed) ...[
                       const SizedBox(width: 3),
                       const Icon(Icons.warning_amber_rounded,
                           size: 11, color: CColors.backGroundOrange)
                     ],
                   ])
-                : const Text('—',
-                    style:
-                        TextStyle(fontSize: 10, color: CColors.textSecondary))),
+                : Text('—',
+                    style: TextStyle(
+                        fontSize: 10, color: context.txtSecondary))),
 
         // Actions
         Padding(
@@ -647,31 +541,34 @@ class _ShipmentsTab extends StatelessWidget {
                     'Track',
                     CColors.textEmeraldGreen,
                     const Color(0xFFBBF7D0),
-                    () => shippingController.trackShipment(s)),
+                    () => shippingController.trackShipment(s),
+                    context),
               if (s.status == ShipmentStatus.pending)
                 _actionBtn(
                     'Dispatch',
                     CColors.textEmeraldGreen,
                     const Color(0xFFBBF7D0),
-                    () => shippingController.markAsDispatched(s.id)),
+                    () => shippingController.markAsDispatched(s.id),
+                    context),
               if (s.status != ShipmentStatus.delivered &&
                   s.status != ShipmentStatus.cancelled)
-                _actionBtn('Update', CColors.textSecondary,
-                    const Color(0xFFE2E8F0), () {}),
+                _actionBtn('Update', context.txtSecondary,
+                    const Color(0xFFE2E8F0), () {}, context),
             ])),
       ],
     );
   }
 
   Widget _actionBtn(
-      String label, Color textColor, Color borderColor, VoidCallback onTap) {
+      String label, Color textColor, Color borderColor, VoidCallback onTap,
+      BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(
             horizontal: CSize.space8, vertical: CSize.space4),
         decoration: BoxDecoration(
-            color: CColors.backGroundWhite,
+            color: context.cardBg,
             borderRadius: BorderRadius.circular(CSize.radius5Small),
             border: Border.all(color: borderColor, width: CSize.borderWidth1)),
         child: Text(label,
@@ -681,7 +578,7 @@ class _ShipmentsTab extends StatelessWidget {
     );
   }
 
-  Widget _sidebar() {
+  Widget _sidebar(BuildContext context) {
     return SizedBox(
       width: 270,
       child: Obx(() {
@@ -694,11 +591,11 @@ class _ShipmentsTab extends StatelessWidget {
               const Icon(Icons.access_time_rounded,
                   size: CSize.icon16Small, color: CColors.backGroundOrange),
               const SizedBox(width: CSize.space5),
-              const Text('Delayed Shipments',
+              Text('Delayed Shipments',
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w800,
-                      color: CColors.textPrimary)),
+                      color: context.txtPrimary)),
               const SizedBox(width: CSize.space5),
               if (delayed.isNotEmpty)
                 Container(
@@ -764,19 +661,19 @@ class _PartnersTab extends StatelessWidget {
               // Header
               Row(
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Delivery Partners',
                           style: TextStyle(
                               fontSize: CSize.font16Medium,
                               fontWeight: FontWeight.w800,
-                              color: CColors.textPrimary)),
-                      SizedBox(height: CSize.space2),
+                              color: context.txtPrimary)),
+                      const SizedBox(height: CSize.space2),
                       Text('Manage your courier and logistics partners',
                           style: TextStyle(
                               fontSize: CSize.font10XSmall,
-                              color: CColors.textSecondary)),
+                              color: context.txtSecondary)),
                     ],
                   ),
                   const Spacer(),

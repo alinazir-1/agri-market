@@ -261,6 +261,18 @@ class MessagesCon extends GetxController {
     }
   }
 
+  /// Called from Customers screen — opens this customer's chat directly.
+  void openConversationForCustomer(String customerId) {
+    final exists = conversations.any((c) => c.id == customerId);
+    if (exists) {
+      // Reset tab to All so the conversation is visible
+      activeTab.value = ConversationTab.all;
+      convSearch.value = '';
+      convSearchController.clear();
+      selectConversation(customerId);
+    }
+  }
+
   void setTab(ConversationTab tab) => activeTab.value = tab;
   void onConvSearch(String val) => convSearch.value = val;
   void onTopSearch(String val) => topSearch.value = val;

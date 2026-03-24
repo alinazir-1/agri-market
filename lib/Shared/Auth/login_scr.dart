@@ -5,6 +5,7 @@ import '../../Core/Constant/colors.dart';
 import '../../Core/Constant/images.dart';
 import '../../Core/Constant/sizes.dart';
 import '../../Core/Routes/app_routes.dart';
+import '../../Core/Theme/app_theme.dart';
 import '../Common Widgets/c_elevated_button.dart';
 import '../Common Widgets/c_text_field.dart';
 import 'login_con.dart';
@@ -17,7 +18,7 @@ class LoginScr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CColors.backGroundLightGrey,
+      backgroundColor: context.appBg,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -41,7 +42,7 @@ class LoginScr extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(CSize.space28),
                     decoration: BoxDecoration(
-                      color: CColors.backGroundWhite,
+                      color: context.cardBg,
                       borderRadius: BorderRadius.circular(CSize.radius20Large),
                       boxShadow: [
                         BoxShadow(
@@ -55,20 +56,20 @@ class LoginScr extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         /// Heading
-                        const Text(
+                        Text(
                           'Welcome Back',
                           style: TextStyle(
                             fontSize: CSize.font24Large,
                             fontWeight: FontWeight.w700,
-                            color: CColors.textPrimary,
+                            color: context.txtPrimary,
                           ),
                         ),
                         const SizedBox(height: CSize.space4),
-                        const Text(
+                        Text(
                           'Log in to your AgriMarket account',
                           style: TextStyle(
                             fontSize: CSize.font13Small,
-                            color: CColors.textSecondary,
+                            color: context.txtSecondary,
                           ),
                         ),
                         const SizedBox(height: CSize.space28),
@@ -119,9 +120,7 @@ class LoginScr extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {
-                              // TODO: forgot password
-                            },
+                            onPressed: () => Get.toNamed(AppRoutes.forgotPassword),
                             style: TextButton.styleFrom(
                               padding: const EdgeInsets.only(
                                   top: CSize.space8, bottom: CSize.space4),
@@ -171,7 +170,7 @@ class LoginScr extends StatelessWidget {
                                 'or',
                                 style: TextStyle(
                                   fontSize: CSize.font13Small,
-                                  color: CColors.textSecondary,
+                                  color: context.txtSecondary,
                                 ),
                               ),
                             ),
@@ -203,11 +202,11 @@ class LoginScr extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               "Don't have an account? ",
                               style: TextStyle(
                                 fontSize: CSize.font13Small,
-                                color: CColors.textSecondary,
+                                color: context.txtSecondary,
                               ),
                             ),
                             GestureDetector(
@@ -255,9 +254,9 @@ class _SocialButton extends StatelessWidget {
         width: double.infinity,
         height: 48,
         decoration: BoxDecoration(
-          color: CColors.backGroundWhite,
+          color: context.cardBg,
           borderRadius: BorderRadius.circular(CSize.radius10Medium),
-          border: Border.all(color: CColors.borderGray),
+          border: Border.all(color: context.borderClr),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -266,10 +265,10 @@ class _SocialButton extends StatelessWidget {
             const SizedBox(width: CSize.space10),
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: CSize.font13Small,
                 fontWeight: FontWeight.w500,
-                color: CColors.textPrimary,
+                color: context.txtPrimary,
               ),
             ),
           ],
@@ -287,10 +286,10 @@ class _FieldLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: CSize.font13Small,
         fontWeight: FontWeight.w600,
-        color: CColors.textPrimary,
+        color: context.txtPrimary,
       ),
     );
   }

@@ -68,4 +68,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # ── NO assets, NO fonts section — Google Fonts handles everything
+#  assets:
+#    - assets/
+#    - assets/logo/
+#    - assets/banner images/
+#    - assets/category images/
+#    - assets/products images/

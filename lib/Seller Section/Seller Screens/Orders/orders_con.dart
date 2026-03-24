@@ -7,11 +7,13 @@ import '../../../Data/Models/product_type_enums.dart';
 class OrdersCon extends GetxController {
   // ── State ──────────────────────────────────────────────────────────────────
 
+  final RxInt mainTabIndex = 0.obs; // 0=Orders, 1=Sample Requests
   final RxInt selectedTab = 0.obs; // 0=All,1=Pending...6=Cancelled
   final RxString selectedTypeFilter = 'All Types'.obs;
   final RxString sortBy = 'Latest'.obs;
   final TextEditingController searchController = TextEditingController();
   final RxString searchQuery = ''.obs;
+  final Rx<OrderModel?> selectedOrder = Rx<OrderModel?>(null);
 
   // ── Orders Data ────────────────────────────────────────────────────────────
 
@@ -336,10 +338,20 @@ class OrdersCon extends GetxController {
     );
   }
 
+  void setMainTab(int i) {
+    mainTabIndex.value = i;
+    selectedOrder.value = null;
+  }
+
   void selectTab(int index) => selectedTab.value = index;
   void selectTypeFilter(String type) => selectedTypeFilter.value = type;
   void selectSort(String sort) => sortBy.value = sort;
   void onSearch(String val) => searchQuery.value = val;
+
+  void selectOrder(OrderModel o) {
+    selectedOrder.value =
+        selectedOrder.value?.orderId == o.orderId ? null : o;
+  }
 
   @override
   void onClose() {

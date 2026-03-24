@@ -4,9 +4,12 @@ import '../../../../Core/Constant/colors.dart';
 import '../../../../Core/Constant/sizes.dart';
 import '../../../../Data/Models/payment_model.dart';
 import '../../../../Data/Models/product_type_enums.dart';
+import '../../../../Shared/Screens Common Widgets/screen_filter_chip.dart';
+import '../../../../Shared/Screens Common Widgets/screen_stat_card.dart';
 
 /// ── 1. Payment Stat Card ──────────────────────────────────────────────────────
-
+/// Thin wrapper — delegates to shared [ScreenStatCard].
+/// Uses `badgeText` param name for backward compatibility.
 class PayStatCard extends StatelessWidget {
   final String label;
   final String value;
@@ -32,69 +35,17 @@ class PayStatCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(CSize.space14),
-      decoration: BoxDecoration(
-        color: CColors.backGroundWhite,
-        borderRadius: BorderRadius.circular(CSize.radius20Large),
-        border: Border.all(
-            color: const Color(0xFFE2E8F0), width: CSize.borderWidth1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: iconBg,
-              borderRadius: BorderRadius.circular(CSize.radius10Medium),
-            ),
-            child: Icon(icon, size: CSize.icon16Small, color: iconColor),
-          ),
-          const SizedBox(height: CSize.space10),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w900,
-              color: valueColor,
-            ),
-          ),
-          const SizedBox(height: CSize.space2),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: CColors.textSecondary,
-              letterSpacing: 0.4,
-            ),
-          ),
-          const SizedBox(height: CSize.space8),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: CSize.space8,
-              vertical: 2,
-            ),
-            decoration: BoxDecoration(
-              color: badgeBg,
-              borderRadius: BorderRadius.circular(CSize.radius20Large),
-            ),
-            child: Text(
-              badge,
-              style: TextStyle(
-                fontSize: 9,
-                fontWeight: FontWeight.w700,
-                color: badgeText,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ScreenStatCard(
+        label: label,
+        value: value,
+        badge: badge,
+        icon: icon,
+        iconBg: iconBg,
+        iconColor: iconColor,
+        badgeBg: badgeBg,
+        badgeTextColor: badgeText,
+        valueColor: valueColor,
+      );
 }
 
 /// ── 2. Payment Status Pill ────────────────────────────────────────────────────
@@ -211,63 +162,8 @@ class PayTypeBadge extends StatelessWidget {
 }
 
 /// ── 4. Payment Filter Chip ────────────────────────────────────────────────────
-
-class PayFilterChip extends StatelessWidget {
-  final String label;
-  final bool isActive;
-  final VoidCallback onTap;
-  final Color? activeColor;
-  final Color? activeBorder;
-  final Color? inactiveBorder;
-  final Color? inactiveText;
-
-  const PayFilterChip({
-    super.key,
-    required this.label,
-    required this.isActive,
-    required this.onTap,
-    this.activeColor,
-    this.activeBorder,
-    this.inactiveBorder,
-    this.inactiveText,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final Color bg = isActive
-        ? (activeColor ?? CColors.backGroundEmeraldGreen)
-        : CColors.backGroundWhite;
-    final Color border = isActive
-        ? (activeBorder ?? CColors.borderEmeraldGreen)
-        : (inactiveBorder ?? const Color(0xFFE2E8F0));
-    final Color text =
-        isActive ? CColors.textWhite : (inactiveText ?? CColors.textSecondary);
-
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        padding: const EdgeInsets.symmetric(
-          horizontal: CSize.space12,
-          vertical: CSize.space4,
-        ),
-        decoration: BoxDecoration(
-          color: bg,
-          borderRadius: BorderRadius.circular(CSize.radius20Large),
-          border: Border.all(color: border),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w600,
-            color: text,
-          ),
-        ),
-      ),
-    );
-  }
-}
+/// Thin wrapper — delegates to shared [ScreenFilterChip].
+typedef PayFilterChip = ScreenFilterChip;
 
 /// ── 5. Monthly Revenue Bar Chart ──────────────────────────────────────────────
 

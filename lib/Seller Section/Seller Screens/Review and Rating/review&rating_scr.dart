@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 
 import '../../../Core/Constant/colors.dart';
 import '../../../Core/Constant/sizes.dart';
+import '../../../Core/Theme/app_theme.dart';
 import '../../../Data/Models/review_model.dart';
+import '../../../Shared/Screens Common Widgets/screen_top_bar.dart';
 import 'Review and Rating Widgets/pending_reply_card.dart';
 import 'Review and Rating Widgets/rating_bar_row.dart';
 import 'Review and Rating Widgets/reply_dialog.dart';
@@ -22,11 +24,17 @@ class ReviewsScr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: context.appBg,
       body: SafeArea(
         child: Column(
           children: [
-            _TopBar(reviewsController: reviewsController),
+            ScreenTopBar(
+              title: 'Reviews & Ratings',
+              subtitle: 'Monitor buyer feedback on your products',
+              searchController: reviewsController.searchController,
+              onSearch: reviewsController.onSearch,
+              searchHint: 'Search reviews...',
+            ),
             _RatingOverview(reviewsController: reviewsController),
             _StatsStrip(reviewsController: reviewsController),
             Expanded(
@@ -47,119 +55,6 @@ class ReviewsScr extends StatelessWidget {
   }
 }
 
-///----Classes-----///
-
-class _TopBar extends StatelessWidget {
-  final ReviewsCon reviewsController;
-  const _TopBar({required this.reviewsController});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: CColors.backGroundWhite,
-        border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
-      ),
-      padding: const EdgeInsets.symmetric(
-          horizontal: CSize.space20, vertical: CSize.space12),
-      child: Row(
-        children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Reviews & Ratings',
-                  style: TextStyle(
-                      fontSize: CSize.font24Large,
-                      fontWeight: FontWeight.w900,
-                      color: CColors.textPrimary)),
-              SizedBox(height: CSize.space2),
-              Text('Monitor buyer feedback on your products',
-                  style: TextStyle(
-                      fontSize: CSize.font10XSmall,
-                      color: CColors.textSecondary)),
-            ],
-          ),
-          const SizedBox(width: CSize.space20),
-          SizedBox(
-            width: 280,
-            height: 36,
-            child: TextField(
-              controller: reviewsController.searchController,
-              onChanged: reviewsController.onSearch,
-              style: const TextStyle(fontSize: 11, color: CColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: 'Search reviews...',
-                hintStyle:
-                    const TextStyle(fontSize: 11, color: CColors.textSecondary),
-                prefixIcon: const Icon(Icons.search,
-                    size: CSize.icon16Small, color: CColors.iconEmeraldGreen),
-                filled: true,
-                fillColor: CColors.backGroundLightGrey,
-                isDense: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: CSize.space10),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0))),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                    borderSide: const BorderSide(
-                        color: CColors.borderEmeraldGreen,
-                        width: CSize.borderWidth1)),
-              ),
-            ),
-          ),
-          const Spacer(),
-          Stack(children: [
-            Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                    color: CColors.backGroundWhite,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFFE2E8F0))),
-                child: const Icon(Icons.notifications_none_rounded,
-                    size: CSize.icon16Small, color: CColors.iconEmeraldGreen)),
-            Positioned(
-                top: 4,
-                right: 4,
-                child: Container(
-                    width: 7,
-                    height: 7,
-                    decoration: BoxDecoration(
-                        color: CColors.notificationDot,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: CColors.backGroundWhite, width: 1.5)))),
-          ]),
-          const SizedBox(width: CSize.space8),
-          Container(
-              width: 34,
-              height: 34,
-              decoration: BoxDecoration(
-                  color: CColors.backGroundWhite,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFFE2E8F0))),
-              child: const Icon(Icons.messenger_outline_rounded,
-                  size: CSize.icon16Small, color: CColors.iconEmeraldGreen)),
-          const SizedBox(width: CSize.space8),
-          const CircleAvatar(
-              radius: 17,
-              backgroundColor: CColors.backGroundEmeraldGreen,
-              child: Text('AS',
-                  style: TextStyle(
-                      fontSize: CSize.font10XSmall,
-                      fontWeight: FontWeight.w800,
-                      color: CColors.textWhite))),
-        ],
-      ),
-    );
-  }
-}
-
 class _RatingOverview extends StatelessWidget {
   final ReviewsCon reviewsController;
   const _RatingOverview({required this.reviewsController});
@@ -167,7 +62,7 @@ class _RatingOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          color: CColors.backGroundWhite,
+          color: context.cardBg,
           child: IntrinsicHeight(
             child: Row(
               children: [
@@ -175,10 +70,10 @@ class _RatingOverview extends StatelessWidget {
                 Container(
                   width: 240,
                   padding: const EdgeInsets.symmetric(vertical: CSize.space20),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     border: Border(
-                      right: BorderSide(color: Color(0xFFE2E8F0)),
-                      bottom: BorderSide(color: Color(0xFFE2E8F0)),
+                      right: BorderSide(color: context.borderClr),
+                      bottom: BorderSide(color: context.borderClr),
                     ),
                   ),
                   child: Column(
@@ -186,10 +81,10 @@ class _RatingOverview extends StatelessWidget {
                     children: [
                       Text(
                         reviewsController.avgRating.toStringAsFixed(1),
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 56,
                             fontWeight: FontWeight.w900,
-                            color: CColors.textPrimary,
+                            color: context.txtPrimary,
                             height: 1),
                       ),
                       const SizedBox(height: CSize.space5),
@@ -199,8 +94,8 @@ class _RatingOverview extends StatelessWidget {
                       const SizedBox(height: CSize.space5),
                       Text(
                         'Based on ${reviewsController.totalReviews} reviews',
-                        style: const TextStyle(
-                            fontSize: 11, color: CColors.textSecondary),
+                        style: TextStyle(
+                            fontSize: 11, color: context.txtSecondary),
                       ),
                     ],
                   ),
@@ -210,9 +105,9 @@ class _RatingOverview extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: CSize.space20, vertical: CSize.space16),
-                    decoration: const BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
+                    decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: context.borderClr)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -281,9 +176,9 @@ class _StatsStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          decoration: const BoxDecoration(
-            color: CColors.backGroundWhite,
-            border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
+          decoration: BoxDecoration(
+            color: context.cardBg,
+            border: Border(bottom: BorderSide(color: context.borderClr)),
           ),
           child: Row(children: [
             Expanded(
@@ -294,7 +189,7 @@ class _StatsStrip extends StatelessWidget {
               iconBg: CColors.backgroundEmerald100,
               iconColor: CColors.iconEmeraldGreen,
             )),
-            Container(width: 1, height: 40, color: const Color(0xFFF1F5F9)),
+            Container(width: 1, height: 40, color: context.dividerClr),
             Expanded(
                 child: ReviewStatCard(
               label: 'Replied',
@@ -303,7 +198,7 @@ class _StatsStrip extends StatelessWidget {
               iconBg: CColors.backgroundEmerald100,
               iconColor: CColors.iconEmeraldGreen,
             )),
-            Container(width: 1, height: 40, color: const Color(0xFFF1F5F9)),
+            Container(width: 1, height: 40, color: context.dividerClr),
             Expanded(
                 child: ReviewStatCard(
               label: 'Pending Reply',
@@ -313,7 +208,7 @@ class _StatsStrip extends StatelessWidget {
               iconColor: CColors.backGroundOrange,
               valueColor: CColors.backGroundOrange,
             )),
-            Container(width: 1, height: 40, color: const Color(0xFFF1F5F9)),
+            Container(width: 1, height: 40, color: context.dividerClr),
             Expanded(
                 child: ReviewStatCard(
               label: 'Flagged',
@@ -335,29 +230,29 @@ class _ReviewListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(right: BorderSide(color: Color(0xFFE2E8F0))),
+      decoration: BoxDecoration(
+        border: Border(right: BorderSide(color: context.borderClr)),
       ),
       child: Column(
         children: [
-          _filterHeader(),
-          Expanded(child: _reviewList()),
+          _filterHeader(context),
+          Expanded(child: _reviewList(context)),
         ],
       ),
     );
   }
 
-  Widget _filterHeader() {
+  Widget _filterHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
           CSize.space20, CSize.space14, CSize.space20, CSize.space12),
       child: Row(
         children: [
-          const Text('All Reviews',
+          Text('All Reviews',
               style: TextStyle(
                   fontSize: CSize.font13Small,
                   fontWeight: FontWeight.w800,
-                  color: CColors.textPrimary)),
+                  color: context.txtPrimary)),
           const Spacer(),
           Obx(() => Wrap(
                 spacing: CSize.space5,
@@ -424,17 +319,17 @@ class _ReviewListSection extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: CSize.space12, vertical: CSize.space5),
                 decoration: BoxDecoration(
-                    color: CColors.backGroundWhite,
+                    color: context.cardBg,
                     borderRadius: BorderRadius.circular(CSize.radius10Medium),
-                    border: Border.all(color: const Color(0xFFE2E8F0))),
+                    border: Border.all(color: context.borderClr)),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<ReviewSort>(
                     value: reviewsController.selectedSort.value,
                     isDense: true,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: CSize.font10XSmall,
                         fontWeight: FontWeight.w600,
-                        color: CColors.textPrimary),
+                        color: context.txtPrimary),
                     icon: const Icon(Icons.keyboard_arrow_down,
                         size: CSize.icon16Small,
                         color: CColors.iconEmeraldGreen),
@@ -460,18 +355,18 @@ class _ReviewListSection extends StatelessWidget {
     );
   }
 
-  Widget _reviewList() {
+  Widget _reviewList(BuildContext context) {
     return Obx(() {
       final list = reviewsController.filteredReviews;
       if (list.isEmpty) {
-        return const Center(
+        return Center(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Icon(Icons.rate_review_outlined,
-                size: CSize.icon36XLarge, color: CColors.textSecondary),
-            SizedBox(height: CSize.space12),
+                size: CSize.icon36XLarge, color: context.txtSecondary),
+            const SizedBox(height: CSize.space12),
             Text('No reviews found',
                 style: TextStyle(
-                    fontSize: CSize.font13Small, color: CColors.textSecondary)),
+                    fontSize: CSize.font13Small, color: context.txtSecondary)),
           ]),
         );
       }
@@ -509,28 +404,28 @@ class _Sidebar extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _topRated(),
+            _topRated(context),
             const SizedBox(height: CSize.space20),
-            _pendingReplies(),
+            _pendingReplies(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _topRated() {
+  Widget _topRated(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(children: [
-          Icon(Icons.star_outline_rounded,
+        Row(children: [
+          const Icon(Icons.star_outline_rounded,
               size: CSize.icon16Small, color: Color(0xFFCA8A04)),
-          SizedBox(width: CSize.space5),
+          const SizedBox(width: CSize.space5),
           Text('Top Rated Products',
               style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
-                  color: CColors.textPrimary)),
+                  color: context.txtPrimary)),
         ]),
         const SizedBox(height: CSize.space10),
         ...reviewsController.topRatedProducts
@@ -539,7 +434,7 @@ class _Sidebar extends StatelessWidget {
     );
   }
 
-  Widget _pendingReplies() {
+  Widget _pendingReplies(BuildContext context) {
     return Obx(() {
       final pending = reviewsController.pendingReviews;
       return Column(
@@ -549,11 +444,11 @@ class _Sidebar extends StatelessWidget {
             const Icon(Icons.pending_outlined,
                 size: CSize.icon16Small, color: CColors.backGroundOrange),
             const SizedBox(width: CSize.space5),
-            const Text('Pending Replies',
+            Text('Pending Replies',
                 style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
-                    color: CColors.textPrimary)),
+                    color: context.txtPrimary)),
             const SizedBox(width: CSize.space5),
             if (reviewsController.pendingCount > 0)
               Container(

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../Data/Models/Customers Model/customer_activity_model.dart';
 import '../../../Data/Models/Customers Model/customer_model.dart';
 import '../../../Data/Models/product_type_enums.dart';
+import '../Messages/message_con.dart';
+import '../Side Bar/side_bar_con.dart';
 
 enum CustomerFilter { all, active, inactive, vip }
 
@@ -185,11 +187,14 @@ class CustomersCon extends GetxController {
   void onSearch(String val) => searchQuery.value = val;
 
   void viewCustomer(CustomerModel customer) {
-    // navigate to customer detail
+    // TODO: navigate to customer detail screen
   }
 
   void messageCustomer(CustomerModel customer) {
-    // navigate to messages
+    // Switch sidebar to Messages tab (index 7)
+    Get.find<SellerSideBarCon>().changeScreen(7);
+    // Open this customer's conversation
+    Get.find<MessagesCon>().openConversationForCustomer(customer.id);
   }
 
   @override

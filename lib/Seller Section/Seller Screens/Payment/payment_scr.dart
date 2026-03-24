@@ -6,22 +6,30 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../../Core/Constant/colors.dart';
 import '../../../Core/Constant/sizes.dart';
+import '../../../Core/Theme/app_theme.dart';
 import '../../../Data/Models/payment_model.dart';
+import '../../../Shared/Screens Common Widgets/screen_top_bar.dart';
 import 'Payment Widgets/all_widgets.dart';
 
 class PaymentsScr extends StatelessWidget {
-  final PaymentsCon paymentsController = Get.put(PaymentsCon());
+  final PaymentsCon paymentsController = Get.find<PaymentsCon>();
 
   PaymentsScr({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: context.appBg,
       body: SafeArea(
         child: Column(
           children: [
-            _TopBar(paymentsController: paymentsController),
+            ScreenTopBar(
+              title: 'Payments',
+              subtitle: 'Track your earnings and transactions',
+              searchController: paymentsController.searchController,
+              onSearch: paymentsController.onSearch,
+              searchHint: 'Search by buyer, order ID...',
+            ),
             _SummaryCards(paymentsController: paymentsController),
             Expanded(
               child: Row(
@@ -42,144 +50,6 @@ class PaymentsScr extends StatelessWidget {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  FILE: payments_top_bar.dart
-// ─────────────────────────────────────────────────────────────────────────────
-
-class _TopBar extends StatelessWidget {
-  final PaymentsCon paymentsController;
-  const _TopBar({required this.paymentsController});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: CColors.backGroundWhite,
-        border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: CSize.space20,
-        vertical: CSize.space12,
-      ),
-      child: Row(
-        children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Payments',
-                style: TextStyle(
-                  fontSize: CSize.font24Large,
-                  fontWeight: FontWeight.w900,
-                  color: CColors.textPrimary,
-                ),
-              ),
-              SizedBox(height: CSize.space2),
-              Text(
-                'Track your earnings and transactions',
-                style: TextStyle(
-                  fontSize: CSize.font10XSmall,
-                  color: CColors.textSecondary,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(width: CSize.space20),
-          SizedBox(
-            width: 280,
-            height: 36,
-            child: TextField(
-              controller: paymentsController.searchController,
-              onChanged: paymentsController.onSearch,
-              style: const TextStyle(fontSize: 11, color: CColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: 'Search by buyer, order ID...',
-                hintStyle:
-                    const TextStyle(fontSize: 11, color: CColors.textSecondary),
-                prefixIcon: const Icon(Icons.search,
-                    size: CSize.icon16Small, color: CColors.iconEmeraldGreen),
-                filled: true,
-                fillColor: CColors.backGroundLightGrey,
-                isDense: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: CSize.space10),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(
-                    color: CColors.borderEmeraldGreen,
-                    width: CSize.borderWidth1,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const Spacer(),
-          Stack(children: [
-            Container(
-              width: 34,
-              height: 34,
-              decoration: BoxDecoration(
-                color: CColors.backGroundWhite,
-                shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-              ),
-              child: const Icon(Icons.notifications_none_rounded,
-                  size: CSize.icon16Small, color: CColors.iconEmeraldGreen),
-            ),
-            Positioned(
-              top: 4,
-              right: 4,
-              child: Container(
-                width: 7,
-                height: 7,
-                decoration: BoxDecoration(
-                  color: CColors.notificationDot,
-                  shape: BoxShape.circle,
-                  border:
-                      Border.all(color: CColors.backGroundWhite, width: 1.5),
-                ),
-              ),
-            ),
-          ]),
-          const SizedBox(width: CSize.space8),
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: CColors.backGroundWhite,
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFE2E8F0)),
-            ),
-            child: const Icon(Icons.messenger_outline_rounded,
-                size: CSize.icon16Small, color: CColors.iconEmeraldGreen),
-          ),
-          const SizedBox(width: CSize.space8),
-          const CircleAvatar(
-            radius: 17,
-            backgroundColor: CColors.backGroundEmeraldGreen,
-            child: Text(
-              'AS',
-              style: TextStyle(
-                fontSize: CSize.font10XSmall,
-                fontWeight: FontWeight.w800,
-                color: CColors.textWhite,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 //  FILE: payments_summary_cards.dart
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -190,9 +60,9 @@ class _SummaryCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          decoration: const BoxDecoration(
-            color: Color(0xFFF8FAFC),
-            border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
+          decoration: BoxDecoration(
+            color: context.cardBg2,
+            border: Border(bottom: BorderSide(color: context.borderClr)),
           ),
           padding: const EdgeInsets.symmetric(
             horizontal: CSize.space20,
@@ -292,19 +162,19 @@ class _TableSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(right: BorderSide(color: Color(0xFFE2E8F0))),
+      decoration: BoxDecoration(
+        border: Border(right: BorderSide(color: context.borderClr)),
       ),
       child: Column(
         children: [
-          _tableHeader(),
-          Expanded(child: _tableBody()),
+          _tableHeader(context),
+          Expanded(child: _tableBody(context)),
         ],
       ),
     );
   }
 
-  Widget _tableHeader() {
+  Widget _tableHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         CSize.space20,
@@ -314,12 +184,12 @@ class _TableSection extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Text(
+          Text(
             'Transactions',
             style: TextStyle(
               fontSize: CSize.font13Small,
               fontWeight: FontWeight.w800,
-              color: CColors.textPrimary,
+              color: context.txtPrimary,
             ),
           ),
           const SizedBox(width: CSize.space12),
@@ -377,18 +247,18 @@ class _TableSection extends StatelessWidget {
                   vertical: CSize.space5,
                 ),
                 decoration: BoxDecoration(
-                  color: CColors.backGroundWhite,
+                  color: context.cardBg,
                   borderRadius: BorderRadius.circular(CSize.radius10Medium),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  border: Border.all(color: context.borderClr),
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<PaymentSort>(
                     value: paymentsController.selectedSort.value,
                     isDense: true,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: CSize.font10XSmall,
                       fontWeight: FontWeight.w600,
-                      color: CColors.textPrimary,
+                      color: context.txtPrimary,
                     ),
                     icon: const Icon(Icons.keyboard_arrow_down,
                         size: CSize.icon16Small,
@@ -415,18 +285,18 @@ class _TableSection extends StatelessWidget {
     );
   }
 
-  Widget _tableBody() {
+  Widget _tableBody(BuildContext context) {
     return Obx(() {
       final list = paymentsController.filteredPayments;
       if (list.isEmpty) {
-        return const Center(
+        return Center(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Icon(Icons.payments_outlined,
-                size: CSize.icon36XLarge, color: CColors.textSecondary),
-            SizedBox(height: CSize.space12),
+                size: CSize.icon36XLarge, color: context.txtSecondary),
+            const SizedBox(height: CSize.space12),
             Text('No transactions found',
                 style: TextStyle(
-                    fontSize: CSize.font13Small, color: CColors.textSecondary)),
+                    fontSize: CSize.font13Small, color: context.txtSecondary)),
           ]),
         );
       }
@@ -436,7 +306,7 @@ class _TableSection extends StatelessWidget {
           columnWidths: _colWidths,
           children: [
             TableRow(
-              decoration: const BoxDecoration(color: Color(0xFFF8FAFC)),
+              decoration: BoxDecoration(color: context.cardBg2),
               children: _headers
                   .map((h) => Padding(
                         padding: const EdgeInsets.symmetric(
@@ -445,24 +315,24 @@ class _TableSection extends StatelessWidget {
                         ),
                         child: Text(
                           h.toUpperCase(),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 9,
                             fontWeight: FontWeight.w800,
-                            color: CColors.textSecondary,
+                            color: context.txtSecondary,
                             letterSpacing: 0.5,
                           ),
                         ),
                       ))
                   .toList(),
             ),
-            ...list.map((payment) => _buildRow(payment)),
+            ...list.map((payment) => _buildRow(payment, context)),
           ],
         ),
       );
     });
   }
 
-  TableRow _buildRow(PaymentModel payment) {
+  TableRow _buildRow(PaymentModel payment, BuildContext context) {
     final amountColor = payment.status == PaymentStatus.failed
         ? CColors.textError
         : payment.status == PaymentStatus.pending ||
@@ -471,9 +341,9 @@ class _TableSection extends StatelessWidget {
             : CColors.textEmeraldGreen;
 
     return TableRow(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border:
-            Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 0.5)),
+            Border(bottom: BorderSide(color: context.dividerClr, width: 0.5)),
       ),
       children: [
         // Order ID
@@ -482,10 +352,10 @@ class _TableSection extends StatelessWidget {
               horizontal: CSize.space8, vertical: CSize.space10),
           child: Text(
             '#${payment.orderId}',
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
-                color: CColors.textPrimary),
+                color: context.txtPrimary),
           ),
         ),
 
@@ -503,15 +373,15 @@ class _TableSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(payment.buyerName,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
-                          color: CColors.textPrimary),
+                          color: context.txtPrimary),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis),
                   Text(payment.buyerEmail,
-                      style: const TextStyle(
-                          fontSize: 9, color: CColors.textSecondary),
+                      style: TextStyle(
+                          fontSize: 9, color: context.txtSecondary),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis),
                 ],
@@ -528,15 +398,15 @@ class _TableSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(payment.productName,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
-                      color: CColors.textPrimary),
+                      color: context.txtPrimary),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis),
               Text('${payment.quantity} ${payment.unit}',
-                  style: const TextStyle(
-                      fontSize: 9, color: CColors.textSecondary)),
+                  style: TextStyle(
+                      fontSize: 9, color: context.txtSecondary)),
             ],
           ),
         ),
@@ -572,7 +442,7 @@ class _TableSection extends StatelessWidget {
               horizontal: CSize.space8, vertical: CSize.space10),
           child: Text(
             paymentsController.formatDate(payment.date),
-            style: const TextStyle(fontSize: 10, color: CColors.textSecondary),
+            style: TextStyle(fontSize: 10, color: context.txtSecondary),
           ),
         ),
 
@@ -588,17 +458,17 @@ class _TableSection extends StatelessWidget {
                 vertical: CSize.space4,
               ),
               decoration: BoxDecoration(
-                color: CColors.backGroundWhite,
+                color: context.cardBg,
                 borderRadius: BorderRadius.circular(CSize.radius10Medium),
                 border: Border.all(
-                    color: const Color(0xFFE2E8F0), width: CSize.borderWidth1),
+                    color: context.borderClr, width: CSize.borderWidth1),
               ),
-              child: const Text(
+              child: Text(
                 'View',
                 style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
-                    color: CColors.textPrimary),
+                    color: context.txtPrimary),
               ),
             ),
           ),
@@ -632,14 +502,14 @@ class _Sidebar extends StatelessWidget {
             ),
             const SizedBox(height: CSize.space20),
             // Pending payments
-            _pendingSection(),
+            _pendingSection(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _pendingSection() {
+  Widget _pendingSection(BuildContext context) {
     return Obx(() {
       final list = paymentsController.pendingPayments;
       return Column(
@@ -649,12 +519,12 @@ class _Sidebar extends StatelessWidget {
             const Icon(Icons.access_time_rounded,
                 size: CSize.icon16Small, color: CColors.backGroundOrange),
             const SizedBox(width: CSize.space5),
-            const Text(
+            Text(
               'Pending Payments',
               style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
-                  color: CColors.textPrimary),
+                  color: context.txtPrimary),
             ),
             const SizedBox(width: CSize.space5),
             if (list.isNotEmpty)

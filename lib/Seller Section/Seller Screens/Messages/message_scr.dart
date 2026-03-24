@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../Core/Constant/colors.dart';
 import '../../../Core/Constant/sizes.dart';
+import '../../../Core/Theme/app_theme.dart';
 import 'Message Widgets/buyer_info_panel.dart';
 import 'Message Widgets/conversation_list.dart';
 import 'Message Widgets/message_chat_window.dart';
 import 'message_con.dart';
 
 class MessagesScr extends StatelessWidget {
-  final MessagesCon messageController = Get.put(MessagesCon());
+  final MessagesCon messageController = Get.find();
 
   MessagesScr({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: context.appBg,
       body: SafeArea(
         child: Column(
           children: [

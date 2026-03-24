@@ -1,29 +1,37 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get.dart';
+
+enum AddListingType { marketplace, advanceBooking, liveAuctions }
 
 class AddNewProductCon extends GetxController {
-  // ── Basic Info ──
+  // ── Listing Type (mandatory) ─────────────────────────────────────────────
+  final Rx<AddListingType?> selectedListingType = Rx<AddListingType?>(null);
+
+  void selectListingType(AddListingType type) {
+    selectedListingType.value = type;
+  }
+
+  // ── Common Basic Info ────────────────────────────────────────────────────
   final productNameController = TextEditingController();
-  final varietyController = TextEditingController();
-  final skuController = TextEditingController();
   final descriptionController = TextEditingController();
   final RxString selectedCategory = ''.obs;
+  final RxString selectedSubCategory = ''.obs;
 
-  // ── Quality & Harvest ──
+  // ── Marketplace extra basic ──────────────────────────────────────────────
+  final varietyController = TextEditingController();
+  final skuController = TextEditingController();
+
+  // ── Quality & Harvest ────────────────────────────────────────────────────
   final RxString selectedGrade = ''.obs;
   final RxString selectedStorageCondition = ''.obs;
   final Rx<DateTime?> harvestDate = Rx<DateTime?>(null);
   final certificationsController = TextEditingController();
   final cropYearController = TextEditingController();
 
-  // ── Specifications ──
-  // Controllers are stored separately so they survive Obx rebuilds
+  // ── Specifications (Marketplace) ─────────────────────────────────────────
   final RxList<Map<String, String>> specifications = <Map<String, String>>[
     {'name': '', 'value': '', 'unit': '%'},
   ].obs;
-
-  // Parallel lists for TextEditingControllers — 1 name + 1 value per row
   final List<TextEditingController> specNameControllers = [
     TextEditingController(),
   ];
@@ -31,7 +39,6 @@ class AddNewProductCon extends GetxController {
     TextEditingController(),
   ];
   final RxList<String> specUnits = <String>['%'].obs;
-
   final List<String> quickSpecChips = [
     'Moisture',
     'Protein',
@@ -44,14 +51,94 @@ class AddNewProductCon extends GetxController {
     'Calcium',
     'Starch',
   ];
-
   final List<String> unitOptions = ['%', 'g/100g', 'mg/kg', 'ppm', 'custom'];
 
+  // ── Sample Availability (Marketplace only) ───────────────────────────────
+  final RxBool sampleAvailable = true.obs;
+  final sampleQtyController = TextEditingController();
+  final samplePriceController = TextEditingController();
+  final RxString selectedSampleUnit = 'kg'.obs;
+  final RxString selectedDispatchTime = ''.obs;
+  final RxString selectedDeliveryCoveredBy = ''.obs;
+
+  // ── Pricing & Quantity (Common) ──────────────────────────────────────────
+  final priceController = TextEditingController();
+  final quantityController = TextEditingController();
+  final moqController = TextEditingController();
+  final RxString selectedUnit = ''.obs;
+  final RxString selectedCurrency = 'USD (\$)'.obs;
+
+  // ── Advance Booking specific ─────────────────────────────────────────────
+  final bookingPriceController = TextEditingController();
+  final totalEstimatedPriceController = TextEditingController();
+
+  // ── Live Auction specific ────────────────────────────────────────────────
+  final startingBidController = TextEditingController();
+  final Rx<DateTime?> auctionEndDateTime = Rx<DateTime?>(null);
+
+  // ── Location & Delivery ──────────────────────────────────────────────────
+  final regionController = TextEditingController();
+  final cityController = TextEditingController();
+  final deliveryTimeController = TextEditingController();
+  final RxString selectedCountry = ''.obs;
+  final RxString selectedDeliveryOption = ''.obs;
+
+  // ── Tags ──────────────────────────────────────────────────────────────────
+  final tagInputController = TextEditingController();
+  final RxList<String> tags = <String>[
+    'Organic',
+    'Premium',
+    'Export Quality',
+  ].obs;
+
+  // ── Images ───────────────────────────────────────────────────────────────
+  final RxList<String> images = <String>[].obs;
+
+  // ── Sub-Category map ─────────────────────────────────────────────────────
+  final Map<String, List<String>> subCategoryMap = {
+    'Grains & Cereals': [
+      'Wheat',
+      'Rice',
+      'Maize / Corn',
+      'Barley',
+      'Sorghum',
+      'Oats',
+      'Millet',
+    ],
+    'Fruits': [
+      'Citrus',
+      'Tropical Fruits',
+      'Stone Fruits',
+      'Berries',
+      'Melons',
+    ],
+    'Vegetables': [
+      'Leafy Greens',
+      'Root Vegetables',
+      'Gourds',
+      'Brassicas',
+      'Alliums',
+    ],
+    'Spices': [
+      'Dried Spices',
+      'Fresh Herbs',
+      'Blended Spices',
+      'Seeds & Pods',
+    ],
+  };
+
+  List<String> get currentSubCategories =>
+      subCategoryMap[selectedCategory.value] ?? [];
+
+  void onCategoryChanged(String cat) {
+    selectedCategory.value = cat;
+    selectedSubCategory.value = '';
+  }
+
+  // ── Spec helpers ─────────────────────────────────────────────────────────
   void addSpecFromChip(String name) {
-    final nameC = TextEditingController(text: name);
-    final valueC = TextEditingController();
-    specNameControllers.add(nameC);
-    specValueControllers.add(valueC);
+    specNameControllers.add(TextEditingController(text: name));
+    specValueControllers.add(TextEditingController());
     specUnits.add('%');
     specifications.add({'name': name, 'value': '', 'unit': '%'});
   }
@@ -80,36 +167,7 @@ class AddNewProductCon extends GetxController {
     specifications[index] = updated;
   }
 
-  // ── Sample Availability ──
-  final RxBool sampleAvailable = true.obs;
-  final sampleQtyController = TextEditingController();
-  final samplePriceController = TextEditingController();
-  final RxString selectedSampleUnit = 'kg'.obs;
-  final RxString selectedDispatchTime = ''.obs;
-  final RxString selectedDeliveryCoveredBy = ''.obs;
-
-  // ── Pricing & Quantity ──
-  final priceController = TextEditingController();
-  final quantityController = TextEditingController();
-  final moqController = TextEditingController();
-  final RxString selectedUnit = ''.obs;
-  final RxString selectedCurrency = 'USD (\$)'.obs;
-
-  // ── Location & Delivery ──
-  final regionController = TextEditingController();
-  final cityController = TextEditingController();
-  final deliveryTimeController = TextEditingController();
-  final RxString selectedCountry = ''.obs;
-  final RxString selectedDeliveryOption = ''.obs;
-
-  // ── Tags ──
-  final tagInputController = TextEditingController();
-  final RxList<String> tags = <String>[
-    'Organic',
-    'Premium',
-    'Export Quality',
-  ].obs;
-
+  // ── Tag helpers ───────────────────────────────────────────────────────────
   void addTag(String tag) {
     if (tag.trim().isNotEmpty && !tags.contains(tag.trim())) {
       tags.add(tag.trim());
@@ -119,41 +177,8 @@ class AddNewProductCon extends GetxController {
 
   void removeTag(String tag) => tags.remove(tag);
 
-  // ── Images ──
-  final RxList<String> images =
-      <String>[].obs; // replace String with File/XFile
-
-  // ── Form completion ──
-  RxDouble get formCompletion {
-    int filled = 0;
-    if (productNameController.text.isNotEmpty) filled++;
-    if (selectedCategory.isNotEmpty) filled++;
-    if (varietyController.text.isNotEmpty) filled++;
-    if (descriptionController.text.isNotEmpty) filled++;
-    if (selectedGrade.isNotEmpty) filled++;
-    if (harvestDate.value != null) filled++;
-    if (selectedStorageCondition.isNotEmpty) filled++;
-    if (certificationsController.text.isNotEmpty) filled++;
-    if (specifications.isNotEmpty) filled++;
-    if (priceController.text.isNotEmpty) filled++;
-    if (selectedUnit.isNotEmpty) filled++;
-    if (quantityController.text.isNotEmpty) filled++;
-    if (moqController.text.isNotEmpty) filled++;
-    if (selectedCountry.isNotEmpty) filled++;
-    if (regionController.text.isNotEmpty) filled++;
-    if (selectedDeliveryOption.isNotEmpty) filled++;
-    if (images.isNotEmpty) filled++;
-    if (tags.isNotEmpty) filled++;
-    return (filled / 18.0).obs;
-  }
-
-  void saveDraft() {
-    // your draft logic here
-  }
-
-  void publishProduct() {
-    // your publish logic here
-  }
+  void saveDraft() {}
+  void publishProduct() {}
 
   @override
   void onClose() {
@@ -168,16 +193,15 @@ class AddNewProductCon extends GetxController {
     priceController.dispose();
     quantityController.dispose();
     moqController.dispose();
+    bookingPriceController.dispose();
+    totalEstimatedPriceController.dispose();
+    startingBidController.dispose();
     regionController.dispose();
     cityController.dispose();
     deliveryTimeController.dispose();
     tagInputController.dispose();
-    for (final c in specNameControllers) {
-      c.dispose();
-    }
-    for (final c in specValueControllers) {
-      c.dispose();
-    }
+    for (final c in specNameControllers) c.dispose();
+    for (final c in specValueControllers) c.dispose();
     super.onClose();
   }
 }
