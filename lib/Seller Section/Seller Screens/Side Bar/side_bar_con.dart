@@ -79,7 +79,16 @@ class PlaceholderScr extends StatelessWidget {
 class SellerSideBarCon extends GetxController {
   final RxInt selectedIndex = 0.obs;
 
-  void changeScreen(int index) => selectedIndex.value = index;
+  /// Used to open/close the drawer on mobile/tablet.
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void openDrawer() => scaffoldKey.currentState?.openDrawer();
+
+  void changeScreen(int index) {
+    selectedIndex.value = index;
+    // Close drawer if open (no-op on desktop)
+    scaffoldKey.currentState?.closeDrawer();
+  }
 
   // Sidebar entries: section headings + nav items
   static const List<SideBarEntry> sideBarEntries = [

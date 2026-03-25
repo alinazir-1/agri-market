@@ -47,22 +47,29 @@ class _OrdersTab extends StatelessWidget {
   const _OrdersTab({required this.c});
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          OrdStatusTabs(c: c),
-          OrdFilterBar(c: c),
-          Expanded(
-            child: Obx(
-              () => Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: OrdList(c: c)),
-                  if (c.selectedOrder.value != null) OrdDetailPanel(c: c),
-                ],
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (context, constraints) {
+          // Hide the detail side-panel on narrow screens to prevent overflow
+          final showDetailPanel = constraints.maxWidth >= 700;
+          return Column(
+            children: [
+              OrdStatusTabs(c: c),
+              OrdFilterBar(c: c),
+              Expanded(
+                child: Obx(
+                  () => Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: OrdList(c: c)),
+                      if (c.selectedOrder.value != null && showDetailPanel)
+                        OrdDetailPanel(c: c),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       );
 }
 

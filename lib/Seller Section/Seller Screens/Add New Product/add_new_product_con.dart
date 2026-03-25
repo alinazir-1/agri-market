@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../Data/country_data.dart';
+
 enum AddListingType { marketplace, advanceBooking, liveAuctions }
 
 class AddNewProductCon extends GetxController {
@@ -11,8 +13,78 @@ class AddNewProductCon extends GetxController {
     selectedListingType.value = type;
   }
 
-  // ── Common Basic Info ────────────────────────────────────────────────────
+  // ── Product name autocomplete ─────────────────────────────────────────────
   final productNameController = TextEditingController();
+  final productNameFocusNode = FocusNode();
+
+  static const List<String> productKeywords = [
+    // Grains & Cereals
+    'Basmati Rice', 'Brown Rice', 'White Rice', 'Jasmine Rice', 'Parboiled Rice',
+    'Long Grain Rice', 'Short Grain Rice', 'Sticky Rice', 'Red Rice', 'Black Rice',
+    'Arborio Rice', 'Wild Rice', 'Wheat', 'Whole Wheat', 'Durum Wheat',
+    'Hard Red Wheat', 'Soft White Wheat', 'Wheat Flour', 'Semolina',
+    'Maize', 'Yellow Corn', 'White Corn', 'Sweet Corn', 'Popcorn', 'Corn Flour',
+    'Cornmeal', 'Barley', 'Malt Barley', 'Feed Barley', 'Oats', 'Rolled Oats',
+    'Steel Cut Oats', 'Pearl Millet', 'Finger Millet', 'Sorghum', 'Grain Sorghum',
+    'Quinoa', 'Rye', 'Buckwheat', 'Teff', 'Triticale', 'Flaxseeds',
+    // Fruits
+    'Apple', 'Red Apple', 'Green Apple', 'Fuji Apple', 'Gala Apple',
+    'Mango', 'Alphonso Mango', 'Sindhri Mango', 'Chaunsa Mango',
+    'Banana', 'Cavendish Banana', 'Plantain',
+    'Orange', 'Navel Orange', 'Valencia Orange',
+    'Lemon', 'Lime', 'Persian Lime', 'Key Lime',
+    'Pineapple', 'Papaya', 'Guava', 'Watermelon', 'Cantaloupe', 'Honeydew Melon',
+    'Strawberry', 'Blueberry', 'Raspberry', 'Blackberry',
+    'Grape', 'Red Grape', 'Green Grape', 'Black Grape',
+    'Kiwi', 'Pomegranate', 'Fig', 'Date', 'Medjool Date',
+    'Peach', 'Plum', 'Apricot', 'Cherry',
+    'Coconut', 'Avocado', 'Passion Fruit', 'Lychee', 'Jackfruit',
+    'Dragon Fruit', 'Rambutan', 'Longan', 'Mangosteen', 'Durian',
+    'Sapodilla', 'Custard Apple', 'Tamarind', 'Starfruit', 'Breadfruit',
+    // Vegetables
+    'Tomato', 'Cherry Tomato', 'Roma Tomato',
+    'Potato', 'Red Potato', 'White Potato', 'Sweet Potato', 'Yam',
+    'Onion', 'Red Onion', 'White Onion', 'Yellow Onion',
+    'Garlic', 'Carrot', 'Spinach', 'Lettuce', 'Cabbage',
+    'Cauliflower', 'Broccoli', 'Cucumber', 'Zucchini', 'Eggplant',
+    'Bell Pepper', 'Chili Pepper', 'Peas', 'Green Beans',
+    'Celery', 'Asparagus', 'Kale', 'Artichoke', 'Radish',
+    'Turnip', 'Beet', 'Pumpkin', 'Squash', 'Okra',
+    'Bitter Gourd', 'Bottle Gourd', 'Ridge Gourd', 'Snake Gourd',
+    'Drumstick', 'Taro', 'Cassava', 'Ginger', 'Turmeric Root',
+    // Spices
+    'Black Pepper', 'White Pepper', 'Red Chili', 'Paprika',
+    'Turmeric', 'Cumin', 'Coriander', 'Cardamom', 'Cinnamon',
+    'Cloves', 'Nutmeg', 'Star Anise', 'Bay Leaves', 'Fenugreek',
+    'Mustard Seeds', 'Fennel Seeds', 'Sesame Seeds', 'Caraway Seeds',
+    'Saffron', 'Vanilla', 'Ginger Powder', 'Garlic Powder',
+    'Onion Powder', 'Oregano', 'Thyme', 'Rosemary', 'Basil',
+    'Mint', 'Dill', 'Lemongrass', 'Galangal',
+    // Pulses
+    'Chickpeas', 'Black Chickpeas', 'Red Lentils', 'Green Lentils',
+    'Yellow Lentils', 'Moong Beans', 'Kidney Beans', 'Black Beans',
+    'White Beans', 'Pinto Beans', 'Soybeans', 'Black-Eyed Peas',
+    'Pigeon Peas', 'Fava Beans', 'Cowpeas', 'Adzuki Beans',
+    // Oilseeds
+    'Sunflower Seeds', 'Canola Seeds', 'Groundnuts', 'Peanuts',
+    'Castor Seeds', 'Niger Seeds', 'Cottonseed',
+    // Nuts
+    'Almonds', 'Walnuts', 'Cashews', 'Pistachios', 'Hazelnuts',
+    'Pecans', 'Macadamia Nuts', 'Pine Nuts', 'Brazil Nuts', 'Chestnuts',
+    // Cash crops & others
+    'Cotton', 'Cotton Lint', 'Jute', 'Sugarcane', 'Raw Sugar',
+    'Brown Sugar', 'Molasses', 'Tea', 'Green Tea', 'Black Tea', 'White Tea',
+    'Coffee', 'Arabica Coffee', 'Robusta Coffee',
+    'Cocoa', 'Cocoa Beans', 'Tobacco', 'Rubber',
+    // Dairy
+    'Milk', 'Whole Milk', 'Skimmed Milk', 'Butter', 'Ghee',
+    'Cheese', 'Cheddar Cheese', 'Mozzarella', 'Yogurt',
+    'Condensed Milk', 'Powdered Milk',
+    // Misc
+    'Honey', 'Beeswax', 'Eggs',
+  ];
+
+  // ── Common Basic Info ────────────────────────────────────────────────────
   final descriptionController = TextEditingController();
   final RxString selectedCategory = ''.obs;
   final RxString selectedSubCategory = ''.obs;
@@ -77,11 +149,30 @@ class AddNewProductCon extends GetxController {
   final Rx<DateTime?> auctionEndDateTime = Rx<DateTime?>(null);
 
   // ── Location & Delivery ──────────────────────────────────────────────────
-  final regionController = TextEditingController();
-  final cityController = TextEditingController();
-  final deliveryTimeController = TextEditingController();
   final RxString selectedCountry = ''.obs;
+  final RxString selectedRegion = ''.obs;
+  final RxString selectedCity = ''.obs;
+  final deliveryTimeController = TextEditingController();
   final RxString selectedDeliveryOption = ''.obs;
+
+  List<String> get allCountries => kAllCountries;
+
+  List<String> get regionsForCountry =>
+      kCountryData[selectedCountry.value]?.keys.toList() ?? [];
+
+  List<String> get citiesForRegion =>
+      kCountryData[selectedCountry.value]?[selectedRegion.value] ?? [];
+
+  void onCountryChanged(String country) {
+    selectedCountry.value = country;
+    selectedRegion.value = '';
+    selectedCity.value = '';
+  }
+
+  void onRegionChanged(String region) {
+    selectedRegion.value = region;
+    selectedCity.value = '';
+  }
 
   // ── Tags ──────────────────────────────────────────────────────────────────
   final tagInputController = TextEditingController();
@@ -183,6 +274,7 @@ class AddNewProductCon extends GetxController {
   @override
   void onClose() {
     productNameController.dispose();
+    productNameFocusNode.dispose();
     varietyController.dispose();
     skuController.dispose();
     descriptionController.dispose();
@@ -196,8 +288,6 @@ class AddNewProductCon extends GetxController {
     bookingPriceController.dispose();
     totalEstimatedPriceController.dispose();
     startingBidController.dispose();
-    regionController.dispose();
-    cityController.dispose();
     deliveryTimeController.dispose();
     tagInputController.dispose();
     for (final c in specNameControllers) c.dispose();

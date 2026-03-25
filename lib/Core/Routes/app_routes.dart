@@ -11,4 +11,5 @@ abstract class AppRoutes {
 
   // ── Seller ────────────────────────────────────────────────────────────────
   static const String sellerDashboard = '/seller-dashboard';
+
 }

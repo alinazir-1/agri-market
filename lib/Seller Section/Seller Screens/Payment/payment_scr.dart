@@ -32,14 +32,20 @@ class PaymentsScr extends StatelessWidget {
             ),
             _SummaryCards(paymentsController: paymentsController),
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                      child: _TableSection(
-                          paymentsController: paymentsController)),
-                  _Sidebar(paymentsController: paymentsController),
-                ],
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final showSidebar = constraints.maxWidth >= 700;
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child: _TableSection(
+                              paymentsController: paymentsController)),
+                      if (showSidebar)
+                        _Sidebar(paymentsController: paymentsController),
+                    ],
+                  );
+                },
               ),
             ),
           ],

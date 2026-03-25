@@ -26,15 +26,20 @@ class SuppliersScr extends StatelessWidget {
               SuppStatRow(c: c),
               SuppFilterBar(c: c),
               Expanded(
-                child: Obx(
-                  () => Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(child: SuppTable(c: c)),
-                      if (c.selectedSupplier.value != null)
-                        SuppDetailPanel(c: c),
-                    ],
-                  ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final showPanel = constraints.maxWidth >= 700;
+                    return Obx(
+                      () => Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(child: SuppTable(c: c)),
+                          if (c.selectedSupplier.value != null && showPanel)
+                            SuppDetailPanel(c: c),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

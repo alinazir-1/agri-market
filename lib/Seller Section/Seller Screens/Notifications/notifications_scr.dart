@@ -30,7 +30,26 @@ class NotificationsScr extends StatelessWidget {
             ),
             _StatsRow(c: c),
             _FilterBar(c: c),
-            Expanded(child: _NotificationList(c: c)),
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final showPanel = constraints.maxWidth >= 700;
+                  return Obx(() {
+                    final selected = c.selectedNotification.value;
+                    return Row(
+                      children: [
+                        Expanded(child: _NotificationList(c: c)),
+                        if (selected != null && showPanel) ...[
+                          VerticalDivider(
+                              width: 1, color: context.borderClr),
+                          _NotifDetailPanel(c: c, notification: selected),
+                        ],
+                      ],
+                    );
+                  });
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -92,13 +111,12 @@ class _StatsRow extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: context.cardBg,
-                      borderRadius:
-                          BorderRadius.circular(CSize.radius10Medium),
+                      borderRadius: BorderRadius.circular(CSize.radius10Medium),
                       border: Border.all(color: context.borderClr),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: const [
+                      children: [
                         Icon(Icons.done_all_rounded,
                             size: CSize.icon16Small,
                             color: CColors.iconEmeraldGreen),
@@ -205,21 +223,21 @@ class _FilterBar extends StatelessWidget {
           ),
           child: Row(
             children: [
-              _chip('All', NotificationFilter.all),
+              _chip(context, 'All', NotificationFilter.all),
               const SizedBox(width: CSize.space8),
-              _chip('Unread', NotificationFilter.unread),
+              _chip(context, 'Unread', NotificationFilter.unread),
               const SizedBox(width: CSize.space8),
-              _chip('Orders & Shipping', NotificationFilter.orders),
+              _chip(context, 'Orders & Shipping', NotificationFilter.orders),
               const SizedBox(width: CSize.space8),
-              _chip('Payments', NotificationFilter.payments),
+              _chip(context, 'Payments', NotificationFilter.payments),
               const SizedBox(width: CSize.space8),
-              _chip('System', NotificationFilter.system),
+              _chip(context, 'System', NotificationFilter.system),
             ],
           ),
         ));
   }
 
-  Widget _chip(String label, NotificationFilter filter) {
+  Widget _chip(BuildContext context, String label, NotificationFilter filter) {
     final isActive = c.activeFilter.value == filter;
     return GestureDetector(
       onTap: () => c.setFilter(filter),
@@ -230,14 +248,10 @@ class _FilterBar extends StatelessWidget {
           vertical: CSize.space5,
         ),
         decoration: BoxDecoration(
-          color: isActive
-              ? CColors.backGroundEmeraldGreen
-              : context.cardBg,
+          color: isActive ? CColors.backGroundEmeraldGreen : context.cardBg,
           borderRadius: BorderRadius.circular(CSize.radius20Large),
           border: Border.all(
-            color: isActive
-                ? CColors.borderEmeraldGreen
-                : context.borderClr,
+            color: isActive ? CColors.borderEmeraldGreen : context.borderClr,
           ),
         ),
         child: Text(
@@ -264,10 +278,10 @@ class _NotificationList extends StatelessWidget {
     return Obx(() {
       final list = c.filteredNotifications;
       if (list.isEmpty) {
-        return Center(
+        return const Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.notifications_off_outlined,
                   size: CSize.icon36XLarge, color: CColors.textSecondary),
               SizedBox(height: CSize.space12),
@@ -302,7 +316,8 @@ class _NotificationList extends StatelessWidget {
             Divider(color: context.dividerClr, height: 1),
         itemBuilder: (_, i) => _NotifCard(
           notification: list[i],
-          onTap: () => c.markAsRead(list[i].id),
+          isSelected: c.selectedNotification.value?.id == list[i].id,
+          onTap: () => c.selectNotification(list[i]),
         ),
       );
     });
@@ -311,9 +326,14 @@ class _NotificationList extends StatelessWidget {
 
 class _NotifCard extends StatefulWidget {
   final NotificationModel notification;
+  final bool isSelected;
   final VoidCallback onTap;
 
-  const _NotifCard({required this.notification, required this.onTap});
+  const _NotifCard({
+    required this.notification,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   State<_NotifCard> createState() => _NotifCardState();
@@ -338,12 +358,17 @@ class _NotifCardState extends State<_NotifCard> {
             vertical: CSize.space14,
           ),
           decoration: BoxDecoration(
-            color: _hovered
-                ? context.hoverBg
-                : n.isRead
-                    ? Colors.transparent
-                    : const Color(0xFFF0FDF4),
+            color: widget.isSelected
+                ? CColors.backGroundEmeraldGreen.withValues(alpha: 0.12)
+                : _hovered
+                    ? context.hoverBg
+                    : n.isRead
+                        ? Colors.transparent
+                        : const Color(0xFFF0FDF4),
             borderRadius: BorderRadius.circular(CSize.radius10Medium),
+            border: widget.isSelected
+                ? Border.all(color: CColors.borderEmeraldGreen)
+                : null,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -390,9 +415,8 @@ class _NotifCardState extends State<_NotifCard> {
                             n.title,
                             style: TextStyle(
                               fontSize: CSize.font13Small,
-                              fontWeight: n.isRead
-                                  ? FontWeight.w500
-                                  : FontWeight.w700,
+                              fontWeight:
+                                  n.isRead ? FontWeight.w500 : FontWeight.w700,
                               color: context.txtPrimary,
                             ),
                             maxLines: 1,
@@ -449,5 +473,236 @@ class _NotifCardState extends State<_NotifCard> {
         ),
       ),
     );
+  }
+}
+
+// ── Notification Detail Panel ──────────────────────────────────────────────
+
+class _NotifDetailPanel extends StatelessWidget {
+  final NotificationsCon c;
+  final NotificationModel notification;
+
+  const _NotifDetailPanel({required this.c, required this.notification});
+
+  @override
+  Widget build(BuildContext context) {
+    final n = notification;
+    return Container(
+      width: 360,
+      color: context.cardBg2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: CSize.space20,
+              vertical: CSize.space14,
+            ),
+            decoration: BoxDecoration(
+              color: context.cardBg,
+              border: Border(bottom: BorderSide(color: context.borderClr)),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  'Notification Detail',
+                  style: TextStyle(
+                    fontSize: CSize.font13Small,
+                    fontWeight: FontWeight.w700,
+                    color: context.txtPrimary,
+                  ),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: c.clearSelection,
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: context.cardBg2,
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: context.borderClr),
+                      ),
+                      child: Icon(Icons.close_rounded,
+                          size: 14, color: context.txtSecondary),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Body
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(CSize.space20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Icon + type badge
+                  Row(
+                    children: [
+                      Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: n.iconBg,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(n.icon, size: 22, color: n.iconColor),
+                      ),
+                      const SizedBox(width: CSize.space12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: n.iconBg,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              n.typeLabel,
+                              style: TextStyle(
+                                fontSize: CSize.font10XSmall,
+                                fontWeight: FontWeight.w700,
+                                color: n.iconColor,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            c.formatTime(n.time),
+                            style: TextStyle(
+                              fontSize: CSize.font10XSmall,
+                              color: context.txtSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: CSize.space16),
+
+                  // Title
+                  Text(
+                    n.title,
+                    style: TextStyle(
+                      fontSize: CSize.font16Medium,
+                      fontWeight: FontWeight.w700,
+                      color: context.txtPrimary,
+                    ),
+                  ),
+
+                  const SizedBox(height: CSize.space12),
+
+                  // Divider
+                  Divider(color: context.dividerClr),
+
+                  const SizedBox(height: CSize.space12),
+
+                  // Body message
+                  Text(
+                    n.body,
+                    style: TextStyle(
+                      fontSize: CSize.font13Small,
+                      color: context.txtSecondary,
+                      height: 1.6,
+                    ),
+                  ),
+
+                  const SizedBox(height: CSize.space20),
+
+                  // Status row
+                  Container(
+                    padding: const EdgeInsets.all(CSize.space14),
+                    decoration: BoxDecoration(
+                      color: context.cardBg,
+                      borderRadius:
+                          BorderRadius.circular(CSize.radius10Medium),
+                      border: Border.all(color: context.borderClr),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          n.isRead
+                              ? Icons.done_all_rounded
+                              : Icons.circle,
+                          size: 14,
+                          color: n.isRead
+                              ? CColors.iconEmeraldGreen
+                              : CColors.notificationDot,
+                        ),
+                        const SizedBox(width: CSize.space8),
+                        Text(
+                          n.isRead ? 'Read' : 'Unread',
+                          style: TextStyle(
+                            fontSize: CSize.font10XSmall,
+                            fontWeight: FontWeight.w600,
+                            color: n.isRead
+                                ? CColors.textEmeraldGreen
+                                : CColors.notificationDot,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          _formatFullTime(n.time),
+                          style: TextStyle(
+                            fontSize: CSize.font10XSmall,
+                            color: context.txtSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  if (n.linkedId != null) ...[
+                    const SizedBox(height: CSize.space12),
+                    Container(
+                      padding: const EdgeInsets.all(CSize.space14),
+                      decoration: BoxDecoration(
+                        color: CColors.backgroundEmerald100,
+                        borderRadius:
+                            BorderRadius.circular(CSize.radius10Medium),
+                        border: Border.all(color: CColors.borderEmeraldGreen),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.link_rounded,
+                              size: 14, color: CColors.iconEmeraldGreen),
+                          const SizedBox(width: CSize.space8),
+                          Text(
+                            'Linked: ${n.linkedId}',
+                            style: const TextStyle(
+                              fontSize: CSize.font10XSmall,
+                              fontWeight: FontWeight.w600,
+                              color: CColors.textEmeraldGreen,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatFullTime(DateTime time) {
+    final months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    final h = time.hour.toString().padLeft(2, '0');
+    final m = time.minute.toString().padLeft(2, '0');
+    return '${time.day} ${months[time.month - 1]} ${time.year}, $h:$m';
   }
 }

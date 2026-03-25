@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 
+import '../Business Profile/business_profile_con.dart';
 import '../Messages/message_con.dart';
 import '../Notifications/notifications_con.dart';
+import '../Payment/payment_con.dart';
 import 'side_bar_con.dart';
 
 class SellerSideBarBinding extends Bindings {
@@ -11,5 +13,7 @@ class SellerSideBarBinding extends Bindings {
     // Register globally so ScreenTopBar can safely Get.find() from ANY screen
     Get.lazyPut(() => NotificationsCon());
     Get.lazyPut(() => MessagesCon());
+    Get.lazyPut(() => PaymentsCon());
+    Get.lazyPut(() => BusinessProfileCon());
   }
 }

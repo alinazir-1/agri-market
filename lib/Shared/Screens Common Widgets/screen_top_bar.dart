@@ -138,6 +138,12 @@ class _ScreenTopBarState extends State<ScreenTopBar> {
     } catch (_) {}
   }
 
+  void _openDrawer() {
+    try {
+      Get.find<SellerSideBarCon>().openDrawer();
+    } catch (_) {}
+  }
+
   @override
   void dispose() {
     _hideTimer?.cancel();
@@ -149,82 +155,129 @@ class _ScreenTopBarState extends State<ScreenTopBar> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 900;
+    final showHamburger = width < 900;
+    final showSearch = !isMobile;
+    final effectiveSearchWidth =
+        isTablet ? 180.0 : widget.searchWidth.clamp(0.0, width * 0.30);
+
     return Container(
       decoration: const BoxDecoration(
         color: CColors.backGroundWhite,
         border: Border(bottom: BorderSide(color: Color(0xFFE2E8F0))),
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: CSize.space20,
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? CSize.space12 : CSize.space20,
         vertical: CSize.space12,
       ),
       child: Row(
         children: [
-          // ── Title + Subtitle ─────────────────────────────────────────────
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.title,
-                style: const TextStyle(
-                  fontSize: CSize.font24Large,
-                  fontWeight: FontWeight.w900,
-                  color: CColors.textPrimary,
-                ),
-              ),
-              const SizedBox(height: CSize.space2),
-              Text(
-                widget.subtitle,
-                style: const TextStyle(
-                  fontSize: CSize.font10XSmall,
-                  color: CColors.textSecondary,
-                ),
-              ),
-            ],
-          ),
-
-          const SizedBox(width: CSize.space20),
-
-          // ── Search Field ─────────────────────────────────────────────────
-          SizedBox(
-            width: widget.searchWidth,
-            height: 36,
-            child: TextField(
-              controller: widget.searchController,
-              onChanged: widget.onSearch,
-              style: const TextStyle(fontSize: 11, color: CColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: widget.searchHint,
-                hintStyle: const TextStyle(
-                    fontSize: 11, color: CColors.textSecondary),
-                prefixIcon: const Icon(Icons.search,
-                    size: CSize.icon16Small,
-                    color: CColors.iconEmeraldGreen),
-                filled: true,
-                fillColor: CColors.backGroundLightGrey,
-                isDense: true,
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: CSize.space10),
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(CSize.radius24XLarge),
-                  borderSide: const BorderSide(
-                      color: CColors.borderEmeraldGreen,
-                      width: CSize.borderWidth1),
+          // ── Hamburger (mobile / tablet only) ────────────────────────────
+          if (showHamburger) ...[
+            GestureDetector(
+              onTap: _openDrawer,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Container(
+                  width: 34,
+                  height: 34,
+                  decoration: BoxDecoration(
+                    color: CColors.backGroundWhite,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
+                  ),
+                  child: const Icon(
+                    Icons.menu_rounded,
+                    size: CSize.icon20Medium,
+                    color: CColors.iconEmeraldGreen,
+                  ),
                 ),
               ),
             ),
+            const SizedBox(width: CSize.space12),
+          ],
+
+          // ── Title + Subtitle ─────────────────────────────────────────────
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize:
+                        isMobile ? CSize.font16Medium : CSize.font24Large,
+                    fontWeight: FontWeight.w900,
+                    color: CColors.textPrimary,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                if (!isMobile) ...[
+                  const SizedBox(height: CSize.space2),
+                  Text(
+                    widget.subtitle,
+                    style: const TextStyle(
+                      fontSize: CSize.font10XSmall,
+                      color: CColors.textSecondary,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ],
+            ),
           ),
+
+          // ── Search Field (tablet + desktop) ──────────────────────────────
+          if (showSearch) ...[
+            const SizedBox(width: CSize.space20),
+            SizedBox(
+              width: effectiveSearchWidth,
+              height: 36,
+              child: TextField(
+                controller: widget.searchController,
+                onChanged: widget.onSearch,
+                style: const TextStyle(
+                    fontSize: 11, color: CColors.textPrimary),
+                decoration: InputDecoration(
+                  hintText: widget.searchHint,
+                  hintStyle: const TextStyle(
+                      fontSize: 11, color: CColors.textSecondary),
+                  prefixIcon: const Icon(Icons.search,
+                      size: CSize.icon16Small,
+                      color: CColors.iconEmeraldGreen),
+                  filled: true,
+                  fillColor: CColors.backGroundLightGrey,
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: CSize.space10),
+                  border: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(CSize.radius24XLarge),
+                    borderSide:
+                        const BorderSide(color: Color(0xFFE2E8F0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(CSize.radius24XLarge),
+                    borderSide:
+                        const BorderSide(color: Color(0xFFE2E8F0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(CSize.radius24XLarge),
+                    borderSide: const BorderSide(
+                        color: CColors.borderEmeraldGreen,
+                        width: CSize.borderWidth1),
+                  ),
+                ),
+              ),
+            ),
+          ],
 
           const Spacer(),
 
@@ -252,7 +305,6 @@ class _ScreenTopBarState extends State<ScreenTopBar> {
                       color: CColors.iconEmeraldGreen,
                     ),
                   ),
-                  // Red dot — only when unread notifications exist
                   Obx(() {
                     final count = _notifCon?.unreadCount ?? 0;
                     if (count == 0) return const SizedBox.shrink();
@@ -299,7 +351,6 @@ class _ScreenTopBarState extends State<ScreenTopBar> {
                       color: CColors.iconEmeraldGreen,
                     ),
                   ),
-                  // Red dot — only when unread messages exist
                   Obx(() {
                     final count = _msgCon?.totalUnread ?? 0;
                     if (count == 0) return const SizedBox.shrink();

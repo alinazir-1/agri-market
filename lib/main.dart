@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'Core/Routes/app_pages.dart';
 import 'Core/Routes/app_routes.dart';
 import 'Core/Theme/app_theme.dart';

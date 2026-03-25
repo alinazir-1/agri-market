@@ -26,7 +26,7 @@ class AddNewProductScr extends StatelessWidget {
   ];
   final List<String> unitOptions = ['Ton', 'Kg', 'Box', 'Bag', 'Quintal'];
   final List<String> currencyOptions = ['USD (\$)', 'PKR (₨)', 'INR (₹)'];
-  final List<String> countries = ['Pakistan', 'India', 'Bangladesh', 'Kenya'];
+  // countries list moved to controller (kAllCountries via c.allCountries)
   final List<String> deliveryOptions = [
     'Seller Delivers',
     'Buyer Picks Up',
@@ -73,92 +73,109 @@ class AddNewProductScr extends StatelessWidget {
   // ══════════════════════════════════════════════════════════════════════════
 
   Widget _topBar(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
+    final titleCol = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Add New Product",
-              style: TextStyle(
-                fontSize: CSize.font24Large,
-                fontWeight: FontWeight.w800,
-                color: context.txtPrimary,
-              ),
-            ),
-            const SizedBox(height: CSize.space2),
-            Text(
-              "Select a listing type and fill in the details",
-              style: TextStyle(
-                fontSize: CSize.font13Small,
-                color: context.txtSecondary,
-              ),
-            ),
-          ],
+        Text(
+          "Add New Product",
+          style: TextStyle(
+            fontSize: isMobile ? CSize.font16Medium : CSize.font24Large,
+            fontWeight: FontWeight.w800,
+            color: context.txtPrimary,
+          ),
         ),
-        Row(
-          children: [
-            OutlinedButton.icon(
-              onPressed: c.saveDraft,
-              icon: Icon(
-                Icons.save_outlined,
-                size: CSize.icon16Small,
-                color: context.txtPrimary,
-              ),
-              label: Text(
-                "Save as Draft",
-                style: TextStyle(
-                  fontSize: CSize.font13Small,
-                  fontWeight: FontWeight.w700,
-                  color: context.txtPrimary,
-                ),
-              ),
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(
-                  color: CColors.borderGray,
-                  width: CSize.borderWidth1,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius10Medium),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: CSize.space20,
-                  vertical: CSize.space12,
-                ),
-              ),
+        if (!isMobile) ...[
+          const SizedBox(height: CSize.space2),
+          Text(
+            "Select a listing type and fill in the details",
+            style: TextStyle(
+              fontSize: CSize.font13Small,
+              color: context.txtSecondary,
             ),
-            const SizedBox(width: CSize.space10),
-            ElevatedButton.icon(
-              onPressed: c.publishProduct,
-              icon: const Icon(
-                Icons.send_rounded,
-                size: CSize.icon16Small,
-                color: CColors.textWhite,
-              ),
-              label: const Text(
-                "Publish Product",
-                style: TextStyle(
-                  fontSize: CSize.font13Small,
-                  fontWeight: FontWeight.w700,
-                  color: CColors.textWhite,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: CColors.backGroundEmeraldGreen,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(CSize.radius10Medium),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: CSize.space20,
-                  vertical: CSize.space12,
-                ),
-                elevation: 0,
-              ),
+          ),
+        ],
+      ],
+    );
+
+    final buttonRow = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        OutlinedButton.icon(
+          onPressed: c.saveDraft,
+          icon: Icon(
+            Icons.save_outlined,
+            size: CSize.icon16Small,
+            color: context.txtPrimary,
+          ),
+          label: Text(
+            "Save as Draft",
+            style: TextStyle(
+              fontSize: CSize.font13Small,
+              fontWeight: FontWeight.w700,
+              color: context.txtPrimary,
             ),
-          ],
+          ),
+          style: OutlinedButton.styleFrom(
+            side: const BorderSide(
+              color: CColors.borderGray,
+              width: CSize.borderWidth1,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(CSize.radius10Medium),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: CSize.space20,
+              vertical: CSize.space12,
+            ),
+          ),
+        ),
+        const SizedBox(width: CSize.space10),
+        ElevatedButton.icon(
+          onPressed: c.publishProduct,
+          icon: const Icon(
+            Icons.send_rounded,
+            size: CSize.icon16Small,
+            color: CColors.textWhite,
+          ),
+          label: const Text(
+            "Publish Product",
+            style: TextStyle(
+              fontSize: CSize.font13Small,
+              fontWeight: FontWeight.w700,
+              color: CColors.textWhite,
+            ),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: CColors.backGroundEmeraldGreen,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(CSize.radius10Medium),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: CSize.space20,
+              vertical: CSize.space12,
+            ),
+            elevation: 0,
+          ),
         ),
       ],
+    );
+
+    if (isMobile) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          titleCol,
+          const SizedBox(height: CSize.space12),
+          buttonRow,
+        ],
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [titleCol, buttonRow],
     );
   }
 
@@ -429,6 +446,15 @@ class AddNewProductScr extends StatelessWidget {
   // ══════════════════════════════════════════════════════════════════════════
 
   Widget _formLayout(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final showSidebar = constraints.maxWidth >= 700;
+        return _formRow(context, showSidebar);
+      },
+    );
+  }
+
+  Widget _formRow(BuildContext context, bool showSidebar) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -470,20 +496,22 @@ class AddNewProductScr extends StatelessWidget {
             );
           }),
         ),
-        const SizedBox(width: CSize.space18),
-        // ── Sidebar ──
-        SizedBox(
-          width: 300,
-          child: Column(
-            children: [
-              _imagesCard(),
-              const SizedBox(height: CSize.space16),
-              _tagsCard(),
-              const SizedBox(height: CSize.space16),
-              _tipBox(),
-            ],
+        if (showSidebar) ...[
+          const SizedBox(width: CSize.space18),
+          // ── Sidebar ──
+          SizedBox(
+            width: 300,
+            child: Column(
+              children: [
+                _imagesCard(),
+                const SizedBox(height: CSize.space16),
+                _tagsCard(),
+                const SizedBox(height: CSize.space16),
+                _tipBox(),
+              ],
+            ),
           ),
-        ),
+        ],
       ],
     );
   }
@@ -596,6 +624,110 @@ class AddNewProductScr extends StatelessWidget {
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  // ── Product Name Autocomplete ──────────────────────────────────────────────
+
+  Widget _productNameAutocomplete() {
+    return RawAutocomplete<String>(
+      textEditingController: c.productNameController,
+      focusNode: c.productNameFocusNode,
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text.trim().isEmpty) {
+          return const Iterable<String>.empty();
+        }
+        final query = textEditingValue.text.toLowerCase();
+        return AddNewProductCon.productKeywords
+            .where((k) => k.toLowerCase().contains(query))
+            .take(8);
+      },
+      displayStringForOption: (option) => option,
+      fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
+        return TextField(
+          controller: controller,
+          focusNode: focusNode,
+          style: const TextStyle(fontSize: 11, color: CColors.textPrimary),
+          decoration: InputDecoration(
+            hintText: 'e.g. Premium Basmati Rice',
+            hintStyle: const TextStyle(fontSize: 11, color: CColors.textSecondary),
+            filled: true,
+            fillColor: const Color(0xFFFAFAFA),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: CSize.space12,
+              vertical: CSize.space8,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(CSize.radius10Medium),
+              borderSide: const BorderSide(color: CColors.borderGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(CSize.radius10Medium),
+              borderSide: const BorderSide(color: CColors.borderGray),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(CSize.radius10Medium),
+              borderSide: const BorderSide(
+                color: CColors.borderEmeraldGreen,
+                width: CSize.borderWidth1,
+              ),
+            ),
+          ),
+        );
+      },
+      optionsViewBuilder: (context, onSelected, options) {
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Material(
+            elevation: 4,
+            borderRadius: BorderRadius.circular(CSize.radius10Medium),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 220),
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: options.length,
+                itemBuilder: (context, index) {
+                  final option = options.elementAt(index);
+                  return InkWell(
+                    onTap: () => onSelected(option),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: CSize.space12,
+                        vertical: CSize.space8,
+                      ),
+                      child: Text(
+                        option,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: CColors.textPrimary,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _disabledField(String hint) {
+    return Container(
+      height: 36,
+      padding: const EdgeInsets.symmetric(horizontal: CSize.space12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F4F6),
+        borderRadius: BorderRadius.circular(CSize.radius10Medium),
+        border: Border.all(color: CColors.borderGray),
+      ),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        hint,
+        style: const TextStyle(fontSize: 11, color: CColors.textSecondary),
       ),
     );
   }
@@ -847,10 +979,7 @@ class AddNewProductScr extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _fieldLabel("Product Name", required: true),
-                _textField(
-                  controller: c.productNameController,
-                  placeholder: "e.g. Premium Basmati Rice",
-                ),
+                _productNameAutocomplete(),
               ],
             ),
             right: Column(
@@ -1770,7 +1899,8 @@ class AddNewProductScr extends StatelessWidget {
                 _dropdown(
                   hint: "Select Country",
                   value: c.selectedCountry,
-                  items: countries,
+                  items: c.allCountries,
+                  onChanged: c.onCountryChanged,
                 ),
               ],
             ),
@@ -1778,20 +1908,35 @@ class AddNewProductScr extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _fieldLabel("Region / State", required: true),
-                _textField(
-                  controller: c.regionController,
-                  placeholder: "e.g. Punjab",
-                ),
+                Obx(() {
+                  final regions = c.regionsForCountry;
+                  if (regions.isEmpty) {
+                    return _disabledField("Select country first");
+                  }
+                  return _dropdown(
+                    hint: "Select Region / State",
+                    value: c.selectedRegion,
+                    items: regions,
+                    onChanged: c.onRegionChanged,
+                  );
+                }),
               ],
             ),
             c: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _fieldLabel("City / District"),
-                _textField(
-                  controller: c.cityController,
-                  placeholder: "e.g. Lahore",
-                ),
+                Obx(() {
+                  final cities = c.citiesForRegion;
+                  if (cities.isEmpty) {
+                    return _disabledField("Select region first");
+                  }
+                  return _dropdown(
+                    hint: "Select City / District",
+                    value: c.selectedCity,
+                    items: cities,
+                  );
+                }),
               ],
             ),
           ),

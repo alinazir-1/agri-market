@@ -235,6 +235,9 @@ class MessagesCon extends GetxController {
 
   // ── Actions ───────────────────────────────────────────────────────────────
 
+  /// Clears the selected conversation (used on mobile to go back to list).
+  void clearSelection() => selectedConversationId.value = '';
+
   void selectConversation(String id) {
     selectedConversationId.value = id;
     // Mark as read

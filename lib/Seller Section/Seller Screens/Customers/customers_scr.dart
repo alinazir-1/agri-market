@@ -23,12 +23,17 @@ class CustomersScr extends StatelessWidget {
             TopBar(c: c),
             SummaryCards(c: c),
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: TableSection(c: c)),
-                  Sidebar(c: c),
-                ],
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final showSidebar = constraints.maxWidth >= 700;
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: TableSection(c: c)),
+                      if (showSidebar) Sidebar(c: c),
+                    ],
+                  );
+                },
               ),
             ),
           ],

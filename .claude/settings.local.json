@@ -4,7 +4,10 @@
       "Bash(git remote:*)",
       "mcp__ide__getDiagnostics",
       "Bash(cat:*)",
-      "Bash(grep -l \"context.appBg\\\\|context.cardBg\\\\|context.txtPrimary\\\\|context.borderClr\" D:/agri_market/lib/Seller Section/Seller Screens/**/*_scr.dart)"
+      "Bash(grep -l \"context.appBg\\\\|context.cardBg\\\\|context.txtPrimary\\\\|context.borderClr\" D:/agri_market/lib/Seller Section/Seller Screens/**/*_scr.dart)",
+      "Bash(flutter analyze:*)",
+      "Bash(xargs grep:*)",
+      "Bash(git add:*)"
     ]
   }
 }

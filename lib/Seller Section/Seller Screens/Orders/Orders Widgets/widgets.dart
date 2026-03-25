@@ -338,25 +338,21 @@ class OrdStatusTabs extends StatelessWidget {
   Widget build(BuildContext context) => Obx(
         () => Container(
           color: CColors.backGroundWhite,
-          padding: const EdgeInsets.symmetric(horizontal: CSize.space20),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(_statuses.length, (i) {
-                final status = _statuses[i];
-                final count =
-                    status == null ? c.totalOrders : c.countByStatus(status);
-                final label = status == null ? 'All' : status.label;
-                final active = c.selectedTab.value == i;
-                final color = status?.color ?? CColors.textEmeraldGreen;
+          child: Row(
+            children: List.generate(_statuses.length, (i) {
+              final status = _statuses[i];
+              final count =
+                  status == null ? c.totalOrders : c.countByStatus(status);
+              final label = status == null ? 'All' : status.label;
+              final active = c.selectedTab.value == i;
+              final color = status?.color ?? CColors.textEmeraldGreen;
 
-                return GestureDetector(
+              return Expanded(
+                child: GestureDetector(
                   onTap: () => c.selectTab(i),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 150),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: CSize.space4, vertical: CSize.space10),
-                    margin: const EdgeInsets.only(right: CSize.space16),
+                    padding: const EdgeInsets.symmetric(vertical: CSize.space10),
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
@@ -365,15 +361,16 @@ class OrdStatusTabs extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: Row(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(label,
                             style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 10,
                                 fontWeight:
                                     active ? FontWeight.w700 : FontWeight.w500,
                                 color: active ? color : CColors.textSecondary)),
-                        const SizedBox(width: CSize.space4),
+                        const SizedBox(height: 2),
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 5, vertical: 1),
@@ -394,9 +391,9 @@ class OrdStatusTabs extends StatelessWidget {
                       ],
                     ),
                   ),
-                );
-              }),
-            ),
+                ),
+              );
+            }),
           ),
         ),
       );

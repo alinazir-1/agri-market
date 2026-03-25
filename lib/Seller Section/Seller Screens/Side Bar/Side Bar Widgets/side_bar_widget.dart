@@ -9,15 +9,83 @@ import 'logout_button.dart';
 import 'nav_item.dart';
 
 class SideBar extends StatelessWidget {
-  const SideBar({super.key, required this.c});
+  const SideBar({super.key, required this.c, this.forceExpanded = false});
   final SellerSideBarCon c;
+
+  /// When true (drawer mode), sidebar is always fully expanded without
+  /// a fixed width — the Drawer widget controls the width.
+  final bool forceExpanded;
 
   @override
   Widget build(BuildContext context) {
-    final double sidebarWidth =
-        MediaQuery.of(context).size.width < 900 ? 72 : 230;
-    final bool isCollapsed = sidebarWidth <= 72;
+    final bool isCollapsed;
 
+    if (forceExpanded) {
+      isCollapsed = false;
+    } else {
+      // Desktop: collapse when window is between 900–1100 px
+      isCollapsed = MediaQuery.of(context).size.width < 1100;
+    }
+
+    final sidebarWidth = forceExpanded ? null : (isCollapsed ? 72.0 : 230.0);
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ── Logo ──────────────────────────────────────────────────────────
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: isCollapsed ? CSize.space12 : CSize.space16,
+            vertical: CSize.space16,
+          ),
+          child: isCollapsed
+              ? Image.asset('assets/logo/Agri Krop.png',
+                  height: 32, width: 32, fit: BoxFit.contain)
+              : Image.asset('assets/logo/Agri Krop.png', height: 40),
+        ),
+
+        const Divider(height: 1, thickness: 0.5, color: Color(0xFFE2E8F0)),
+        const SizedBox(height: CSize.space8),
+
+        // ── Nav Items ─────────────────────────────────────────────────────
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.symmetric(
+              horizontal: isCollapsed ? CSize.space8 : CSize.space10,
+              vertical: CSize.space4,
+            ),
+            itemCount: SellerSideBarCon.sideBarEntries.length,
+            itemBuilder: (context, index) {
+              final entry = SellerSideBarCon.sideBarEntries[index];
+              if (entry is SideBarHeading) {
+                return isCollapsed
+                    ? const SizedBox(height: CSize.space12)
+                    : _SectionHeading(title: entry.title);
+              }
+              return NavItemWidget(
+                item: entry as NavItem,
+                c: c,
+                isCollapsed: isCollapsed,
+              );
+            },
+          ),
+        ),
+
+        // ── Divider + Logout ──────────────────────────────────────────────
+        const Divider(height: 1, thickness: 0.5, color: Color(0xFFE2E8F0)),
+        LogoutButton(isCollapsed: isCollapsed),
+      ],
+    );
+
+    // Drawer mode: no fixed width, no right-border decoration
+    if (forceExpanded) {
+      return ColoredBox(
+        color: CColors.backGroundWhite,
+        child: content,
+      );
+    }
+
+    // Desktop mode: fixed width with animated transitions + right border
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       width: sidebarWidth,
@@ -27,58 +95,12 @@ class SideBar extends StatelessWidget {
             right: BorderSide(
                 color: CColors.borderGray, width: CSize.borderWidth1)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // ── Logo ────────────────────────────────────────────────────────
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: isCollapsed ? CSize.space12 : CSize.space16,
-              vertical: CSize.space16,
-            ),
-            child: isCollapsed
-                ? Image.asset('assets/logo/Agri Krop.png',
-                    height: 32, width: 32, fit: BoxFit.contain)
-                : Image.asset('assets/logo/Agri Krop.png', height: 40),
-          ),
-
-          const Divider(height: 1, thickness: 0.5, color: Color(0xFFE2E8F0)),
-          const SizedBox(height: CSize.space8),
-
-          // ── Nav Items ───────────────────────────────────────────────────
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(
-                horizontal: isCollapsed ? CSize.space8 : CSize.space10,
-                vertical: CSize.space4,
-              ),
-              itemCount: SellerSideBarCon.sideBarEntries.length,
-              itemBuilder: (context, index) {
-                final entry = SellerSideBarCon.sideBarEntries[index];
-                if (entry is SideBarHeading) {
-                  return isCollapsed
-                      ? const SizedBox(height: CSize.space12)
-                      : _SectionHeading(title: entry.title);
-                }
-                return NavItemWidget(
-                  item: entry as NavItem,
-                  c: c,
-                  isCollapsed: isCollapsed,
-                );
-              },
-            ),
-          ),
-
-          // ── Divider + Logout ─────────────────────────────────────────────
-          const Divider(height: 1, thickness: 0.5, color: Color(0xFFE2E8F0)),
-          LogoutButton(isCollapsed: isCollapsed),
-        ],
-      ),
+      child: content,
     );
   }
 }
 
-// ── Section Heading ─────────────────────────────────────────────────────────
+// ── Section Heading ──────────────────────────────────────────────────────────
 
 class _SectionHeading extends StatelessWidget {
   const _SectionHeading({required this.title});

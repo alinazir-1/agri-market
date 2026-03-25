@@ -299,15 +299,15 @@ class _FilterBar extends StatelessWidget {
                 color: context.cardBg2,
                 borderRadius: BorderRadius.circular(CSize.radius10Medium)),
             child: Row(children: [
-              _toggleBtn(Icons.view_list_rounded, ViewMode.list),
+              _toggleBtn(context, Icons.view_list_rounded, ViewMode.list),
               const SizedBox(width: 2),
-              _toggleBtn(Icons.grid_view_rounded, ViewMode.grid),
+              _toggleBtn(context, Icons.grid_view_rounded, ViewMode.grid),
             ]),
           ),
         ]),
       ));
 
-  Widget _toggleBtn(IconData icon, ViewMode mode) {
+  Widget _toggleBtn(BuildContext context, IconData icon, ViewMode mode) {
     final active = c.viewMode.value == mode;
     return GestureDetector(
       onTap: () => c.setViewMode(mode),

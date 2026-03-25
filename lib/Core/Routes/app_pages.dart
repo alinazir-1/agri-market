@@ -52,5 +52,6 @@ abstract class AppPages {
       page: () => SellerSideBarScr(),
       binding: SellerSideBarBinding(),
     ),
+
   ];
 }

@@ -213,14 +213,14 @@ class _ProfileHeaderCard extends StatelessWidget {
                   offset: const Offset(0, -28),
                   child: Column(
                     children: [
-                      Obx(() => Text(
-                            c.businessName.text,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                              color: context.txtPrimary,
-                            ),
-                          )),
+                      Text(
+                        c.businessName.text,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: context.txtPrimary,
+                        ),
+                      ),
                       const SizedBox(height: CSize.space4),
                       Obx(() => Text(
                             c.selectedCategory.value,

@@ -38,14 +38,20 @@ class ReviewsScr extends StatelessWidget {
             _RatingOverview(reviewsController: reviewsController),
             _StatsStrip(reviewsController: reviewsController),
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                      child: _ReviewListSection(
-                          reviewsController: reviewsController)),
-                  _Sidebar(reviewsController: reviewsController),
-                ],
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final showSidebar = constraints.maxWidth >= 700;
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child: _ReviewListSection(
+                              reviewsController: reviewsController)),
+                      if (showSidebar)
+                        _Sidebar(reviewsController: reviewsController),
+                    ],
+                  );
+                },
               ),
             ),
           ],

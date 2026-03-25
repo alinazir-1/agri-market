@@ -68,9 +68,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-#  assets:
-#    - assets/
-#    - assets/logo/
-#    - assets/banner images/
-#    - assets/category images/
-#    - assets/products images/
+  assets:
+    - assets/
+    - assets/logo/
+    - assets/images/
+    - assets/category images/
+    - assets/banner images/
+    - assets/social icon/

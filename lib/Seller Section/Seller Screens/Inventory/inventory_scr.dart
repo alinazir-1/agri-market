@@ -37,12 +37,17 @@ class InventoryScr extends StatelessWidget {
             ),
             _summaryCards(context),
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: _tableSection(context)),
-                  _sidebar(context),
-                ],
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final showSidebar = constraints.maxWidth >= 700;
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: _tableSection(context)),
+                      if (showSidebar) _sidebar(context),
+                    ],
+                  );
+                },
               ),
             ),
           ],

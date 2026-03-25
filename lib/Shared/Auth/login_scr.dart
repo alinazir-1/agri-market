@@ -263,12 +263,15 @@ class _SocialButton extends StatelessWidget {
           children: [
             Image.asset(image, height: 22, width: 22),
             const SizedBox(width: CSize.space10),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: CSize.font13Small,
-                fontWeight: FontWeight.w500,
-                color: context.txtPrimary,
+            Flexible(
+              child: Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: CSize.font13Small,
+                  fontWeight: FontWeight.w500,
+                  color: context.txtPrimary,
+                ),
               ),
             ),
           ],

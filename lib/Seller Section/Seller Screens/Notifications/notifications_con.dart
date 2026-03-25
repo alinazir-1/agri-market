@@ -8,6 +8,15 @@ class NotificationsCon extends GetxController {
   final RxString searchQuery = ''.obs;
   final Rx<NotificationFilter> activeFilter = NotificationFilter.all.obs;
 
+  final Rxn<NotificationModel> selectedNotification = Rxn<NotificationModel>();
+
+  void selectNotification(NotificationModel n) {
+    selectedNotification.value = n;
+    markAsRead(n.id);
+  }
+
+  void clearSelection() => selectedNotification.value = null;
+
   final RxList<NotificationModel> notifications = <NotificationModel>[
     NotificationModel(
       id: 'N1',
