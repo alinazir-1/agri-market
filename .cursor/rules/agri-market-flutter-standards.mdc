@@ -1,0 +1,35 @@
+---
+description: Agri Market Flutter (Web) — mandatory architecture, UI tokens, loading patterns, and responsiveness. Apply to every Dart/Flutter task in this repo without being asked.
+globs: lib/**/*.dart
+alwaysApply: true
+---
+
+# Agri Market — Flutter standards (always follow)
+
+You are a **Senior Flutter Developer** with 10+ years of experience. **Follow these rules on every change** — do not wait for the user to repeat them.
+
+## Core discipline
+
+1. **Never break existing behavior** — only the exact changes requested; no drive-by refactors.
+2. **StatelessWidget only** — do not introduce `StatefulWidget`.
+3. **GetX only** for reactive UI and async coordination — no `setState`, `StreamBuilder`, or `FutureBuilder` for app state.
+4. **Design tokens** — use **`AppColors`** and **`AppSizes`** (or project equivalents); do not hardcode colors/sizes/spacing literals for themeable UI. For **`AppContainer`** dimensions and padding, use **numeric literals** (e.g. `40`) as per project convention, not `AppSizes.space40`-style indirection unless that file already uses it consistently.
+5. **Shared UI components** — prefer **`AppContainer`**, **`AppText`**, **`AppElevatedButton`** (and other existing shared widgets). Avoid raw Material/Cupertino where a project widget already exists.
+6. **Responsive web UI** — use **`Expanded`**, **`Flexible`**, **`LayoutBuilder`**, constraints, and breakpoints so layouts work on web widths.
+7. **Packages** — use current stable versions; **ask before adding** a new dependency.
+8. **File layout** — small widgets (chips, dialogs, row sections) live in **separate files** under that screen’s `widgets/` folder (or match the feature’s existing structure).
+
+## Typography
+
+9. Font sizes: **12 / 14 / 16 / 18 / 20 / 24** px (caption → headings). Weights **400 / 500 / 600 / 700**. Always use **`maxLines`** + **`TextOverflow.ellipsis`** where text can truncate.
+
+## Loading & empty UX (automatic — never skip)
+
+10. **Every screen / list / grid** that shows data must include:
+    - **Loading on action buttons** — `AppElevatedButton(isLoading: …)` or **`AppInlineProgress`** for compact row actions (`lib/common/loading/app_feature_loading_widgets.dart`).
+    - **Skeleton** while loading lists/grids — e.g. **`AppSkeletonListColumn`**, `AppListSkeleton`, `AppCardGridSkeleton`, or existing helpers under `lib/common/loading/`.
+    - **Empty state** when the observed list is empty and not loading — e.g. **`AppEmptyListState`** (or the feature’s equivalent empty widget).
+11. **Per-row actions** (tables, chips, icon buttons) — use a **scoped key on the controller** (e.g. `RxnString` / reactive field holding `"$rowId|$actionSlug"`) so only the active row shows a spinner.
+12. **Never skip** the above loading patterns for “small” or placeholder UIs — apply them **by default** on new and edited screens.
+
+When project rules conflict with generic advice, **follow this rule file and existing patterns in the same feature folder**.

@@ -1,0 +1,1117 @@
+<user_query>
+oky add product form mein basic information mein product variety ka option hai os mein jo varieties hein unko predefine krna hai catlog bnna k drop down bnna dena hai
+aur logic ye lgani hai k jaisy he product name select kry seller/user tu os prdocut naam ke jitni variety hein wo jb user dropw down open kry tu osi product k related variety show hun ab mein tum ko variety ka data deta hun is ko be same jaisy  category sub category k dropdown banye hein wesy he krna hai baki is k elawa aur kisi ko be touch ni krna....aur product variety ko drop down mein convert kr du 
+
+ab ye loo prodcut name aur variety
+
+Maize / Corn
+Varieties: Yellow Dent, White Dent, Waxy, Flint, Sweet, Popcorn, Blue, High-Oil, High-Lysine, QPM (Quality Protein Maize)
+
+Wheat
+Varieties: Hard Red Winter (HRW), Hard Red Spring (HRS), Soft Red Winter (SRW), Hard White (HW), Soft White (SW), Durum
+
+Barley
+Varieties: Two-Row (2R), Six-Row (6R), Hulless, Waxy, Malting, Feed Grade
+
+Sorghum / Milo
+Varieties: Red Sorghum, White Sorghum, Tan-Plant, High-Tannin, BMR (Brown Mid-Rib), Waxy, High-Lysine
+
+Oats
+Varieties: Common White Oat, Red Oat, Naked/Hulless Oat, Black Oat, Spring Oat, Winter Oat
+
+Rye
+Varieties: Winter Rye, Spring Rye, Hybrid Rye, Diploid Rye, Tetraploid Rye
+
+Triticale
+Varieties: Spring Triticale, Winter Triticale, Hexaploid, Octaploid
+
+Millet (Pearl)
+Varieties: ICTP 8203, Tifleaf 3, HHB 67, Bajra Hybrid, Composite
+
+Millet (Finger / Ragi)
+Varieties: African Finger Millet, Ragi Local, CO-15, GPU-28, VR-708
+
+Rice (Paddy / Brown)
+Varieties: Long Grain White, Long Grain Brown, Medium Grain, Short Grain, Parboiled, Basmati, Jasmine, IR-64
+
+Buckwheat
+Varieties: Common Buckwheat (Fagopyrum esculentum), Tartary Buckwheat (F. tataricum)
+
+Teff
+Varieties: White Teff, Brown/Red Teff, Mixed Teff
+
+Amaranth Grain
+Varieties: Golden Amaranth (A. hypochondriacus), Red Amaranth (A. cruentus), Plainsman
+
+Quinoa
+Varieties: White Quinoa, Red Quinoa, Black Quinoa, Rainbow Quinoa
+
+Canary Seed
+Varieties: Gluten-Free Canary Seed, Regular Canary Seed, Hulled
+
+Wheat Bran
+Varieties: Fine Wheat Bran, Coarse Wheat Bran, Super Bran, Stabilized Bran
+
+Wheat Shorts
+Varieties: Fine Shorts, Coarse Shorts, Red Dog Shorts
+
+Wheat Middlings
+Varieties: Middlings (Fine), Middlings (Coarse), Red Middlings
+
+Wheat Germ
+Varieties: Defatted Wheat Germ, Full-Fat Wheat Germ, Toasted Wheat Germ
+
+Wheat Flour (Feed Grade)
+Varieties: Feed Grade (Low Protein), Feed Grade (Medium Protein)
+
+Pollard
+Varieties: Pollard (Standard), Pollard (Fine), Pollard (Coarse)
+
+Rice Bran
+Varieties: Defatted Rice Bran, Stabilized Rice Bran, Full-Fat Rice Bran, Parboiled Rice Bran
+
+Rice Polish
+Varieties: Rice Polish (Standard), Rice Polish (Fine)
+
+Rice Husk / Hulls
+Varieties: Rice Husk (Raw), Rice Hull Ash, Pelleted Rice Hulls
+
+Broken Rice
+Varieties: Broken Rice (Long Grain), Broken Rice (Short Grain), Parboiled Broken, Brewers Rice
+
+Rice Flour
+Varieties: Rice Flour (White), Rice Flour (Brown), Rice Flour (Parboiled)
+
+Maize Bran
+Varieties: Maize Bran (Coarse), Maize Bran (Fine), Hominy Bran
+
+Maize Germ
+Varieties: Maize Germ (Defatted), Maize Germ (Full-Fat)
+
+Hominy Feed
+Varieties: Hominy Feed (Standard), Hominy Feed (Coarse)
+
+Corn Gluten Feed
+Varieties: Corn Gluten Feed (Dry), Corn Gluten Feed (Wet)
+
+Corn Gluten Meal
+Varieties: Corn Gluten Meal 60%, Corn Gluten Meal 41%
+
+Corn Steep Liquor
+Varieties: Low-Sugar CSL, High-Sugar CSL, Fermented CSL
+
+Maize Flour
+Varieties: Maize Flour (Fine), Maize Flour (Coarse / Grits)
+
+Sorghum Bran
+Varieties: Sorghum Bran (Red), Sorghum Bran (White)
+
+Sorghum Flour
+Varieties: Sorghum Flour (Fine), Sorghum Flour (Whole Grain)
+
+Barley Bran
+Varieties: Hulled Barley Bran, Pearl Barley Bran
+
+Barley Flour
+Varieties: Barley Flour (Fine), Barley Flour (Coarse)
+
+Oat Bran
+Varieties: Oat Bran (Fine), Oat Bran (Coarse), Toasted Oat Bran
+
+Oat Hulls
+Varieties: Oat Hulls (Raw), Oat Hulls (Ground)
+
+Oat Feed
+Varieties: Oat Feed (Coarse), Oat Feed (Fine), Oat Mill By-Product
+
+Soybean (Whole, Raw)
+Varieties: Commodity Non-GMO, Commodity GMO, Identity-Preserved (IP), Organic
+
+Full-Fat Soybean (Extruded)
+Varieties: Extruded Full-Fat SBM (Non-GMO), Extruded Full-Fat SBM (GMO)
+
+Soybean Meal (Solvent Extracted, 44% CP)
+Varieties: SBM 44% CP (Standard), SBM 44% CP (Non-GMO), SBM 44% CP (Organic)
+
+Soybean Meal (HP, 48% CP)
+Varieties: SBM 48% CP (Hi-Pro), SBM 48% HP (Non-GMO), SBM 48% HP Organic
+
+Soybean Oil Cake (Expeller)
+Varieties: Soybean OC 45% CP, Soybean OC 42% CP
+
+Soy Protein Concentrate (SPC)
+Varieties: SPC 65%, SPC 70% (HP)
+
+Soy Protein Isolate (SPI)
+Varieties: SPI 90% (Food Grade), SPI 90% (Feed Grade)
+
+Soybean Hulls
+Varieties: Soy Hulls (Raw), Soy Hulls (Pelleted)
+
+Soy Oil
+Varieties: Crude Soy Oil, RBD Soy Oil, Degummed Soy Oil, Refined Soy Oil
+
+Sunflower Seed
+Varieties: Confection Sunflower, Oil-Type Sunflower, Striped Sunflower, High-Oleic Sunflower
+
+Sunflower Meal (Decorticated)
+Varieties: Sunflower Meal Dec. 28% CP, Sunflower Meal Dec. 35% CP, Non-Decorticated
+
+Sunflower Cake (Expeller)
+Varieties: Sunflower Cake Expeller 25% CP, Sunflower Cake 30% CP
+
+Sunflower Oil
+Varieties: Crude Sunflower Oil, RBD Sunflower Oil, High-Oleic Sunflower Oil
+
+Sunflower Hulls
+Varieties: Sunflower Hulls (Raw), Sunflower Hulls (Ground)
+
+Canola Meal
+Varieties: Canola Meal 36% CP, Canola Meal 38% CP (Low Glucosinolate), 00-Canola Meal
+
+Rapeseed Cake
+Varieties: Rapeseed Cake (High GLS), Rapeseed Cake (Low GLS / 00)
+
+Canola Oil
+Varieties: Crude Canola Oil, RBD Canola Oil, High-Erucic Rapeseed Oil (HEAR)
+
+Rapeseed (Full Fat)
+Varieties: Rapeseed Full-Fat (High GLS), Rapeseed Full-Fat (Low GLS)
+
+Cottonseed Meal
+Varieties: Cottonseed Meal (Solvent), Cottonseed Meal (Expeller), Glandless Cottonseed Meal
+
+Cottonseed Cake
+Varieties: Cottonseed Cake (40% CP), Cottonseed Cake (36% CP)
+
+Cottonseed Oil
+Varieties: Crude Cottonseed Oil, RBD Cottonseed Oil
+
+Cottonseed Hulls
+Varieties: Cottonseed Hulls (Coarse), Cottonseed Hulls (Ground)
+
+Groundnut Meal
+Varieties: Groundnut Meal (Solvent 48% CP), Groundnut Meal (Expeller 44% CP), Aflatoxin-Free Certified
+
+Groundnut Cake (Expeller)
+Varieties: Groundnut Cake 42% CP, Groundnut Cake 45% CP
+
+Groundnut Oil
+Varieties: Crude Groundnut Oil, RBD Groundnut Oil
+
+Groundnut Hulls
+Varieties: Groundnut Hulls (Raw), Groundnut Hulls (Ground)
+
+Palm Kernel Cake (PKC)
+Varieties: PKC (Expeller), PKC (Solvent), PKC (Pellet)
+
+Palm Kernel Meal
+Varieties: PKM (Standard), PKM (Defatted)
+
+Palm Kernel Oil
+Varieties: Crude Palm Kernel Oil, RBD Palm Kernel Oil
+
+Crude Palm Oil (CPO)
+Varieties: CPO (Standard), RBD Palm Oil, Palm Olein, Palm Stearin
+
+Palm Oil Sludge / POME
+Varieties: Palm Oil Mill Effluent (POME), Decanter Cake, Palm Sludge Oil
+
+Linseed Meal
+Varieties: Linseed Meal (Solvent 34% CP), Linseed Meal (Expeller 30% CP)
+
+Linseed Cake
+Varieties: Linseed Cake (30% CP), Linseed Cake (36% CP)
+
+Linseed Oil
+Varieties: Raw Linseed Oil, Refined Linseed Oil, Boiled Linseed Oil
+
+Sesame Meal
+Varieties: Sesame Meal (Dehulled 48% CP), Sesame Meal (Whole Seed 40% CP)
+
+Sesame Oil
+Varieties: Crude Sesame Oil, Cold-Pressed Sesame Oil, Toasted Sesame Oil
+
+Copra Meal
+Varieties: Copra Meal (Expeller 20% CP), Copra Meal (Solvent 22% CP)
+
+Coconut Oil
+Varieties: Crude Coconut Oil, RBD Coconut Oil, Virgin Coconut Oil (VCO)
+
+Mustard Seed Cake
+Varieties: Mustard Cake (Yellow), Mustard Cake (Brown/Black)
+
+Safflower Meal
+Varieties: Safflower Meal (Decorticated 40% CP), Safflower Meal (Undecorticated 20% CP)
+
+Camelina Meal
+Varieties: Camelina Meal (Standard), Camelina Meal (Low GLS)
+
+Meat and Bone Meal (MBM)
+Varieties: MBM 40% CP, MBM 45% CP, MBM 50% CP (EU Grade), MBM (Australia), MBM (USA)
+
+Meat Meal
+Varieties: Meat Meal 55% CP, Meat Meal 50% CP
+
+Blood Meal
+Varieties: Ring-Dried Blood Meal (RDBM), Flash-Dried Blood Meal (FDBM), Spray-Dried Blood Meal
+
+Feather Meal (Hydrolyzed)
+Varieties: Hydrolyzed Feather Meal 80% CP, Enzymatically Hydrolyzed Feather Meal
+
+Poultry By-Product Meal
+Varieties: PBPM (Standard), PBPM (Low Ash), PBPM (Wet Rendered)
+
+Poultry Offal Meal
+Varieties: Poultry Offal Meal (Standard), Poultry Offal Meal (Defatted)
+
+Hydrolyzed Leather Meal
+Varieties: Hydrolyzed Leather Meal (Standard)
+
+Bone Meal (Steamed)
+Varieties: Steamed Bone Meal 30% CP, Steamed Bone Meal (Defatted), Bone Char
+
+Tallow (Beef)
+Varieties: Beef Tallow (Edible), Beef Tallow (Inedible), RBD Tallow
+
+Lard / Pork Fat
+Varieties: Lard (Edible), Lard (Feed Grade), Pork Fat (Refined)
+
+Poultry Fat
+Varieties: Poultry Fat (Feed Grade), Poultry Fat (Refined), Choice Poultry Fat
+
+Porcine Plasma (Spray-Dried)
+Varieties: Spray-Dried Porcine Plasma (SDPP), Spray-Dried Porcine Plasma (Low IgG)
+
+Porcine Hemoglobin
+Varieties: Porcine Hemoglobin (Spray-Dried), Deamidated Hemoglobin
+
+Porcine Liver Meal
+Varieties: Porcine Liver Meal (Standard), Porcine Liver Meal (Defatted)
+
+Dried Whey
+Varieties: Dried Whey (Standard), Delactosed Whey, Demineralized Whey
+
+Casein
+Varieties: Casein (Acid), Casein (Rennet), Casein (Micellar)
+
+Rumen Contents (Dried)
+Varieties: Dried Rumen Contents (Standard)
+
+Fish Meal (Anchovy, 65% CP)
+Varieties: FM Anchovy 65% CP (Peru), FM Anchovy 60% CP, LT Anchovy FM
+
+Fish Meal (Menhaden)
+Varieties: FM Menhaden 65% CP (USA), FM Menhaden 60% CP
+
+Fish Meal (Sardine)
+Varieties: FM Sardine (Japan/EU), FM Sardine 65% CP, FM Sardine LT
+
+Fish Meal (Herring)
+Varieties: FM Herring (Norway), FM Herring (Iceland), FM Herring LT
+
+Fish Meal (Tilapia By-Product)
+Varieties: Tilapia By-Product Meal (Standard), Tilapia By-Product Meal (Dried)
+
+Fish Meal (Catfish By-Product)
+Varieties: Catfish By-Product Meal (Standard), Catfish By-Product Meal (Dried)
+
+Fish Meal (Low Temperature, LT)
+Varieties: LT Fish Meal 65% CP, LT Fish Meal 67% CP
+
+Fish Meal (Super Prime)
+Varieties: Super Prime FM 68% CP (Peru), Super Prime FM 70% CP
+
+Fish Oil (Anchovy)
+Varieties: Fish Oil Anchovy (Crude), Fish Oil Anchovy (Refined)
+
+Fish Oil (Salmon)
+Varieties: Fish Oil Salmon (Crude), Fish Oil Salmon (Refined)
+
+Fish Oil (Menhaden)
+Varieties: Fish Oil Menhaden (Crude), Fish Oil Menhaden (Refined)
+
+Fish Oil (Refined, EPA/DHA enriched)
+Varieties: Refined Fish Oil (EPA/DHA >30%), Refined Fish Oil (EPA/DHA >50%), MEG-3 Enriched
+
+Fish Protein Hydrolysate (FPH)
+Varieties: FPH (Liquid), FPH (Spray-Dried Powder), FPH (Deodorized)
+
+Fish Solubles (Condensed)
+Varieties: Fish Solubles (Standard), Fish Solubles (Concentrated >50%)
+
+Spray-Dried Fish Solubles
+Varieties: Spray-Dried Fish Solubles (Standard), Spray-Dried Fish Solubles (Low Ash)
+
+Shrimp Meal
+Varieties: Shrimp Meal (Whole), Shrimp Meal (Shell Only), Shrimp Meal (Head)
+
+Krill Meal
+Varieties: Krill Meal (Antarctic, E. superba), Krill Meal (North Pacific)
+
+Krill Oil
+Varieties: Krill Oil (Phospholipid-rich), Krill Oil (Refined), RIMFROST Krill Oil
+
+Crab Meal
+Varieties: Crab Meal (Whole), Crab Meal (Shell Meal), Blue Crab Meal
+
+Squid Meal
+Varieties: Squid Meal (Standard), Squid Meal (Low-Temperature)
+
+Squid Oil
+Varieties: Squid Oil (Crude), Squid Oil (Refined)
+
+Oyster Shell Meal
+Varieties: Oyster Shell Meal (Fine), Oyster Shell Meal (Coarse), Calcite
+
+Spirulina (Arthrospira platensis)
+Varieties: Spirulina (Food Grade), Spirulina (Feed Grade), Spirulina (Organic)
+
+Chlorella
+Varieties: Chlorella vulgaris (Standard), Chlorella pyrenoidosa
+
+Nannochloropsis
+Varieties: Nannochloropsis gaditana, Nannochloropsis oculata, Nannochloropsis salina
+
+Thraustochytrid DHA Oil
+Varieties: Aurantiochytrium (DHA 20%), Schizochytrium (DHA 30%)
+
+Seaweed Meal (Kelp)
+Varieties: Kelp Meal (Ascophyllum nodosum), Kelp Meal (Laminaria), Sargassum Meal
+
+Agar / Carrageenan
+Varieties: Agar (Food Grade), Carrageenan (Kappa), Carrageenan (Iota), Carrageenan (Lambda)
+
+Soybean (Whole)
+Varieties: Soybean Whole (Yellow), Soybean Whole (Black), Soybean Whole (Green)
+
+Field Beans / Faba Beans
+Varieties: Faba Bean (Tannin-Free), Faba Bean (High-Tannin), Horse Bean
+
+Mung Beans
+Varieties: Mung Bean (Green), Mung Bean (Golden), Mung Bean (Black)
+
+Field Peas
+Varieties: Field Pea (Yellow), Field Pea (Green), Field Pea (Maple)
+
+Pea Protein Concentrate
+Varieties: Pea Protein Conc. 65% CP, Pea Protein Conc. 80% CP
+
+Pea Starch
+Varieties: Pea Starch (Native), Pea Starch (Modified)
+
+Pea Hull / Fibre
+Varieties: Pea Hull (Raw), Pea Hull (Pellet)
+
+Lentils
+Varieties: Red Lentil, Green Lentil, Brown Lentil, Black Lentil (Beluga)
+
+Chickpeas / Garbanzo Beans
+Varieties: Kabuli Chickpea, Desi Chickpea, Black Chickpea
+
+Lupins (Sweet)
+Varieties: White Lupin (L. albus), Yellow Lupin (L. luteus), Narrow-Leaf Lupin (L. angustifolius)
+
+Cowpeas
+Varieties: Black-Eyed Pea (Cowpea), Cream Cowpea, Brown Cowpea
+
+Pigeon Peas (Toor Dal)
+Varieties: Pigeon Pea (Desi), Pigeon Pea (Hybrid), Red Gram
+
+Guar Meal
+Varieties: Guar Meal (Refined), Guar Meal (Crude), Guar Korma
+
+Cassava Chips (Dried)
+Varieties: Cassava Chips (Thailand), Cassava Chips (Vietnam), Cassava Chips (Africa)
+
+Cassava Flour
+Varieties: Cassava Flour (Fine), Cassava Flour (Coarse / Garri)
+
+Cassava Starch
+Varieties: Native Cassava Starch, Modified Cassava Starch, Oxidized Cassava Starch
+
+Cassava Pellets
+Varieties: Cassava Pellets (Standard 65%), Cassava Pellets (High-Starch 68%)
+
+Cassava Peels (Dried)
+Varieties: Cassava Peels (Sun-Dried), Cassava Peels (Oven-Dried)
+
+Potato Starch
+Varieties: Potato Starch (Native), Potato Starch (Modified / Waxy)
+
+Potato Protein
+Varieties: Potato Protein (Standard 80%), Potato Protein (HP 85%)
+
+Potato Pulp
+Varieties: Potato Pulp (Wet), Potato Pulp (Dried)
+
+Dried Potato Flakes
+Varieties: Dried Potato Flakes (Standard), Instant Potato Flakes
+
+Sweet Potato Flour
+Varieties: Sweet Potato Flour (Orange), Sweet Potato Flour (White/Purple)
+
+Sweet Potato Starch
+Varieties: Sweet Potato Starch (Native), Sweet Potato Starch (Modified)
+
+Yam Flour
+Varieties: Yam Flour (White Yam), Yam Flour (Water Yam), Yam Flour (Yellow Yam)
+
+Tapioca Starch
+Varieties: Tapioca Starch (Native), Tapioca Starch (Modified)
+
+Corn Starch
+Varieties: Corn Starch (Native), Corn Starch (Waxy), Corn Starch (High-Amylose)
+
+Wheat Starch
+Varieties: Wheat Starch (A-Starch), Wheat Starch (B-Starch)
+
+Modified Starch
+Varieties: Modified Starch (Hydroxypropylated), Modified Starch (Cross-linked), Modified Starch (Acetylated)
+
+Molasses (Sugarcane)
+Varieties: Sugarcane Molasses (A-Molasses), Sugarcane Molasses (B-Molasses), Blackstrap Molasses
+
+Bagasse
+Varieties: Bagasse (Fresh), Bagasse (Dried), Bagasse (Pellet)
+
+Sugarcane Tops & Leaves
+Varieties: Sugarcane Tops (Fresh), Sugarcane Tops (Dried)
+
+Filter Cake / Press Mud
+Varieties: Filter Cake (Fresh), Filter Cake (Dried / Press Mud)
+
+Cane Juice
+Varieties: Cane Juice (Fresh), Cane Juice (Concentrated)
+
+Sugar Beet Molasses
+Varieties: Sugar Beet Molasses (Standard), Beet Molasses (Low Sugar)
+
+Dried Beet Pulp
+Varieties: Dried Beet Pulp (Shreds), Dried Beet Pulp (Pellets), Molassed Beet Pulp
+
+Vinasse
+Varieties: Vinasse (Cane), Vinasse (Beet), Condensed Vinasse
+
+Sucrose
+Varieties: Refined White Sugar, Raw Cane Sugar, Brown Sugar
+
+Glucose / Dextrose
+Varieties: Glucose Monohydrate, Anhydrous Dextrose, Liquid Glucose
+
+Lactose
+Varieties: Lactose (Edible Grade), Lactose (Feed Grade), Lactose Monohydrate
+
+Soybean Oil
+Varieties: Crude Soy Oil, RBD Soy Oil, Degummed Soy Oil
+
+Sunflower Oil
+Varieties: Crude Sunflower Oil, RBD Sunflower Oil, High-Oleic
+
+Canola / Rapeseed Oil
+Varieties: Crude Canola Oil, RBD Canola Oil, High-Erucic Rapeseed Oil
+
+Palm Oil (RBD)
+Varieties: CPO (Raw), RBD Palm Oil, Palm Olein, Palm Stearin
+
+Corn Oil
+Varieties: Corn Oil (Crude), Corn Oil (RBD)
+
+Coconut Oil
+Varieties: Coconut Oil (Crude), Coconut Oil (RBD), Virgin Coconut Oil
+
+Cottonseed Oil
+Varieties: Cottonseed Oil (Crude), Cottonseed Oil (RBD)
+
+Beef Tallow
+Varieties: Beef Tallow (Edible Grade), Beef Tallow (Inedible), RBD Tallow
+
+Lard
+Varieties: Lard (Edible), Lard (Feed Grade)
+
+Poultry Fat
+Varieties: Poultry Fat (Feed Grade), Poultry Fat (Refined)
+
+Yellow Grease
+Varieties: Yellow Grease (Standard), Yellow Grease (Filtered)
+
+Choice White Grease (CWG)
+Varieties: CWG (Standard), CWG (Bleached)
+
+Soy Lecithin
+Varieties: Soy Lecithin (Fluid), Soy Lecithin (Deoiled Powder), Soy Lecithin (Hydroxylated)
+
+Sunflower Lecithin
+Varieties: Sunflower Lecithin (Fluid), Sunflower Lecithin (Powder)
+
+Rapeseed Lecithin
+Varieties: Rapeseed Lecithin (Fluid), Rapeseed Lecithin (Powder)
+
+Skim Milk Powder (SMP)
+Varieties: SMP (Extra Grade), SMP (Standard Grade), SMP (Low Heat), SMP (High Heat)
+
+Whole Milk Powder (WMP)
+Varieties: WMP (Standard 26% Fat), WMP (Low Fat), WMP (Instant)
+
+Whey Powder
+Varieties: Sweet Whey Powder, Acid Whey Powder, Demineralized Whey (70% DEM), Demineralized Whey (90% DEM)
+
+Whey Protein Concentrate (WPC)
+Varieties: WPC 35%, WPC 50%, WPC 65%, WPC 80%
+
+Whey Protein Isolate (WPI)
+Varieties: WPI 90% (Micro-filtered), WPI 92% (Ion-Exchanged)
+
+Lactose
+Varieties: Lactose (Feed Grade), Lactose Monohydrate (Pharma Grade)
+
+Casein
+Varieties: Acid Casein, Rennet Casein, Micellar Casein
+
+Milk Replacer
+Varieties: Milk Replacer (Calf), Milk Replacer (Piglet), Milk Replacer (Lamb)
+
+Butter / Butter Oil
+Varieties: Butter (Sweet Cream), Anhydrous Milkfat (AMF), Butter Oil
+
+Whole Egg Powder
+Varieties: Whole Egg Powder (Spray-Dried), Whole Egg Powder (Freeze-Dried)
+
+Egg White Powder / Albumen
+Varieties: Egg Albumen (Spray-Dried), Egg Albumen (Freeze-Dried)
+
+Egg Yolk Powder
+Varieties: Egg Yolk Powder (Standard), Egg Yolk Powder (Freeze-Dried)
+
+Dried Whole Egg
+Varieties: Dried Whole Egg (Standard), Dried Whole Egg (Organic)
+
+Citrus Pulp (Dried)
+Varieties: Citrus Pulp Dried (Standard), Citrus Pulp Pellets, Orange Pulp, Lemon Pulp
+
+Apple Pomace (Dried)
+Varieties: Apple Pomace (Sun-Dried), Apple Pomace (Dehydrated), Apple Pomace (Pellet)
+
+Grape Pomace
+Varieties: Grape Pomace (White), Grape Pomace (Red), Grape Seed Meal
+
+Tomato Pomace
+Varieties: Tomato Pomace (Dried), Tomato Seed Meal
+
+Mango Kernel Flour
+Varieties: Mango Kernel Flour (Standard), Mango Kernel Flour (Defatted)
+
+Banana Flour / Peel
+Varieties: Banana Flour (Green Banana), Banana Peel Flour
+
+Pineapple Waste Meal
+Varieties: Pineapple Waste Meal (Standard)
+
+Alfalfa Meal
+Varieties: Alfalfa Meal (15% CP), Alfalfa Meal (17% CP), Dehydrated Alfalfa Pellets, Sun-Cured Alfalfa
+
+Dried Lucerne / Hay
+Varieties: Dried Lucerne (Standard), Lucerne Hay (Baled)
+
+Beetroot Powder
+Varieties: Beetroot Powder (Standard), Beetroot Powder (Organic)
+
+Carrot Powder
+Varieties: Carrot Powder (Standard), Carrot Powder (Organic)
+
+Spinach Powder
+Varieties: Spinach Powder (Standard), Spinach Powder (Freeze-Dried)
+
+Pumpkin Powder
+Varieties: Pumpkin Powder (Standard), Pumpkin Powder (Organic)
+
+Phytase
+Varieties: Phytase (E. coli derived), Phytase (Aspergillus niger), Phytase (Peniophora lycii), Ronozyme HiPhos
+
+Xylanase
+Varieties: Xylanase (Trichoderma), Xylanase (Bacillus), Econase XT
+
+Amylase
+Varieties: Alpha-Amylase (Bacterial), Alpha-Amylase (Fungal)
+
+Protease
+Varieties: Protease (Serine), Protease (Metalloprotease), Ronozyme ProAct
+
+Lipase
+Varieties: Lipase (Fungal), Lipase (Microbial), Lipase (Pancreatic)
+
+Beta-glucanase
+Varieties: Beta-glucanase (Trichoderma), Beta-glucanase (Bacillus)
+
+Cellulase
+Varieties: Cellulase (Trichoderma reesei), Cellulase (Aspergillus)
+
+Saccharomyces cerevisiae (Live Yeast)
+Varieties: Saccharomyces cerevisiae (Standard), S. cerevisiae (Chromium Enriched), DiamondV XP
+
+Bacillus subtilis
+Varieties: Bacillus subtilis (Standard), B. subtilis (Spore Form), Chr. Hansen BioPlus
+
+Lactobacillus acidophilus
+Varieties: Lactobacillus acidophilus (Standard), L. acidophilus (Freeze-Dried)
+
+MOS (Mannan-Oligosaccharides)
+Varieties: MOS (Standard), MOS (ActiMOS), Bio-MOS
+
+FOS (Fructo-Oligosaccharides)
+Varieties: FOS (Short Chain scFOS), FOS (Long Chain lcFOS)
+
+Beta-Glucan
+Varieties: Beta-Glucan (Oat-derived), Beta-Glucan (Yeast-derived)
+
+Ethoxyquin (EQ)
+Varieties: Ethoxyquin (EQ) 66%, EQ 33% (Diluted)
+
+BHA (Butylated Hydroxyanisole)
+Varieties: BHA (Food Grade), BHA (Feed Grade)
+
+BHT (Butylated Hydroxytoluene)
+Varieties: BHT (Food Grade), BHT (Feed Grade)
+
+Natural Vitamin E (Tocopherol)
+Varieties: Natural Vit-E (d-Alpha Tocopherol), Natural Vit-E (Mixed Tocopherols)
+
+Rosemary Extract
+Varieties: Rosemary Extract (Liquid), Rosemary Extract (Powder)
+
+Bentonite
+Varieties: Sodium Bentonite (Fine), Calcium Bentonite, Bentonite (Pellet Grade)
+
+Guar Gum
+Varieties: Guar Gum (Regular), Guar Gum (Fast-Hydrating), Guar Gum (Locust Bean)
+
+Lignosulfonate
+Varieties: Lignosulfonate (Calcium), Lignosulfonate (Sodium), Lignosulfonate (Magnesium)
+
+CMC (Carboxymethyl Cellulose)
+Varieties: CMC (Low Viscosity), CMC (Medium Viscosity), CMC (High Viscosity)
+
+Sodium Bentonite
+Varieties: Sodium Bentonite (Standard), Sodium Bentonite (HP Grade)
+
+Betaine (Natural)
+Varieties: Betaine Natural (Anhydrous), Betaine Natural (Monohydrate)
+
+Betaine HCl (Synthetic)
+Varieties: Betaine HCl (Standard), Betaine HCl (Feed Grade)
+
+Trimethylamine Oxide (TMAO)
+Varieties: TMAO (Standard), TMAO (Synthetic)
+
+Nucleotides
+Varieties: Nucleotides (Yeast-derived), Nucleotides (Fermentation-derived)
+
+Inosine Monophosphate (IMP)
+Varieties: IMP (Feed Grade), IMP (Food Grade)
+
+Dimethyl Sulfoxide (DMSO)
+Varieties: DMSO (Technical Grade), DMSO (Pharmaceutical Grade)
+
+Organic Acids (Formic, Propionic)
+Varieties: Formic Acid 85%, Propionic Acid 99%, Blend (Formic+Propionic)
+
+Butyric Acid / Tributyrin
+Varieties: Butyric Acid (Free), Tributyrin (Glycerol Tributyrate), Na-Butyrate
+
+Humic Acids
+Varieties: Humic Acid (Leonardite), Humic Acid (Lignite), Potassium Humate
+
+Fulvic Acids
+Varieties: Fulvic Acid (Standard), Potassium Fulvate
+
+Beta-1,3/1,6-Glucan
+Varieties: Beta-1,3-Glucan, Beta-1,3/1,6-Glucan (Yeast), Curdlan
+
+Vitamin C (Ascorbic Acid)
+Varieties: Ascorbic Acid (L-AA), Ascorbyl Phosphate (Stabilized), Ascorbyl Polyphosphate
+
+Astaxanthin
+Varieties: Astaxanthin (Synthetic 10%), Astaxanthin (Natural Haematococcus), Astaxanthin (Yeast)
+
+Canthaxanthin
+Varieties: Canthaxanthin (10%), Canthaxanthin (1%)
+
+Dicalcium Phosphate (DCP)
+Varieties: DCP (Feed Grade 18% P), DCP (Technical Grade)
+
+Monocalcium Phosphate (MCP)
+Varieties: MCP (Feed Grade 22% P), MCP (Technical)
+
+Tricalcium Phosphate (TCP)
+Varieties: TCP (Feed Grade), TCP (HP 20% P)
+
+Limestone Flour (CaCO3)
+Varieties: Limestone Fine (< 1mm), Limestone Coarse (1-3mm), Limestone Pellet
+
+Oyster Shell Flour
+Varieties: Oyster Shell (Fine), Oyster Shell (Coarse)
+
+Common Salt (NaCl)
+Varieties: Salt (Iodized), Salt (Non-Iodized), Salt (Fine), Salt (Coarse)
+
+Sodium Bicarbonate
+Varieties: Sodium Bicarbonate (Feed Grade), Sodium Bicarbonate (Technical)
+
+Magnesium Oxide (MgO)
+Varieties: Magnesium Oxide (Caustic), Magnesium Oxide (Dead-Burned), Magnesium Oxide (Calcined)
+
+Potassium Chloride
+Varieties: Potassium Chloride (Feed Grade), Potassium Chloride (Technical)
+
+Zinc Sulfate
+Varieties: Zinc Sulfate (Monohydrate), Zinc Sulfate (Heptahydrate)
+
+Zinc Oxide
+Varieties: Zinc Oxide (Feed Grade 72%), Zinc Oxide (HP 80%)
+
+Manganese Sulfate
+Varieties: Manganese Sulfate (Monohydrate), Manganese Sulfate (Heptahydrate)
+
+Copper Sulfate
+Varieties: Copper Sulfate (Pentahydrate), Copper Sulfate (Anhydrous)
+
+Ferrous Sulfate
+Varieties: Ferrous Sulfate (Monohydrate), Ferrous Sulfate (Heptahydrate)
+
+Selenium (Sodium Selenite)
+Varieties: Sodium Selenite (Standard), Selenium (Barium Selenate)
+
+Selenium Yeast
+Varieties: Selenium Yeast (2000 ppm), Selenium Yeast (1000 ppm), Sel-Plex
+
+Iodine (Potassium Iodide)
+Varieties: Potassium Iodide (KI), Calcium Iodate (Ca(IO3)2)
+
+Cobalt Sulfate
+Varieties: Cobalt Sulfate (Monohydrate), Cobalt Carbonate
+
+Chromium Picolinate
+Varieties: Chromium Picolinate (Standard), Chromium Nicotinate
+
+Zinc Methionine
+Varieties: Zinc Methionine (Availa-Zn), Zinc Methionine Complex
+
+Manganese Methionine
+Varieties: Manganese Methionine (Availa-Mn), Manganese Methionine Complex
+
+Copper Proteinate
+Varieties: Copper Proteinate (Bioplex Cu), Copper Lysinate
+
+Iron Proteinate
+Varieties: Iron Proteinate (Bioplex Fe), Iron Glycinate
+
+Vitamin A (Retinyl Acetate)
+Varieties: Retinyl Acetate (500,000 IU/g), Retinyl Palmitate (1,000,000 IU/g)
+
+Vitamin D3 (Cholecalciferol)
+Varieties: Cholecalciferol (500,000 IU/g), Cholecalciferol (1,000,000 IU/g)
+
+Vitamin E (dl-Alpha-Tocopheryl Acetate)
+Varieties: dl-Alpha-Tocopheryl Acetate (50%), d-Alpha-Tocopheryl Acetate (Natural)
+
+Vitamin K3 (Menadione)
+Varieties: Menadione Sodium Bisulfite (MSB), Menadione Nicotinamide Bisulfite (MNB)
+
+Vitamin B1 (Thiamine)
+Varieties: Thiamine Mononitrate, Thiamine HCl
+
+Vitamin B2 (Riboflavin)
+Varieties: Riboflavin (Feed Grade 80%), Riboflavin (Technical 98%)
+
+Vitamin B3 (Niacin)
+Varieties: Niacin (Nicotinic Acid), Niacinamide (Nicotinamide)
+
+Vitamin B5 (Pantothenic Acid)
+Varieties: Calcium D-Pantothenate (Feed Grade), D-Panthenol
+
+Vitamin B6 (Pyridoxine)
+Varieties: Pyridoxine HCl (Feed Grade), Pyridoxal-5-Phosphate
+
+Vitamin B7 (Biotin)
+Varieties: D-Biotin (2%), D-Biotin (1%)
+
+Vitamin B9 (Folic Acid)
+Varieties: Folic Acid (Feed Grade 80%), Folic Acid (Technical 96%)
+
+Vitamin B12 (Cyanocobalamin)
+Varieties: Cyanocobalamin (1%), Hydroxocobalamin (0.1%)
+
+Vitamin C (Ascorbic Acid)
+Varieties: Ascorbic Acid (L-AA), Ascorbyl-2-Polyphosphate (APP), Sodium Ascorbate
+
+L-Lysine HCl
+Varieties: L-Lysine HCl (98.5%), L-Lysine Sulfate (65%), L-Lysine Liquid
+
+DL-Methionine
+Varieties: DL-Methionine (99%), Liquid DL-Methionine, Methionine Hydroxy Analogue (MHA)
+
+L-Threonine
+Varieties: L-Threonine (98.5%), L-Threonine (Feed Grade)
+
+L-Tryptophan
+Varieties: L-Tryptophan (98%), L-Tryptophan (Feed Grade)
+
+L-Valine
+Varieties: L-Valine (98.5%), L-Valine (Feed Grade)
+
+L-Isoleucine
+Varieties: L-Isoleucine (98%), L-Isoleucine (Feed Grade)
+
+L-Leucine
+Varieties: L-Leucine (98%), L-Leucine (Feed Grade)
+
+L-Arginine
+Varieties: L-Arginine (98%), L-Arginine HCl
+
+Taurine
+Varieties: Taurine (Feed Grade 99%), Taurine (Synthetic)
+
+Glycine
+Varieties: Glycine (Feed Grade 99%), Glycine (Technical)
+
+L-Glutamine
+Varieties: L-Glutamine (Feed Grade 98%), L-Glutamine (Pharmaceutical)
+
+Brewer's Yeast (Dried)
+Varieties: Brewer's Yeast (Standard 44% CP), Brewer's Yeast (Debittered), Dried Brewer's Yeast (Organic)
+
+Baker's Yeast
+Varieties: Baker's Yeast (Active Dry), Baker's Yeast (Instant)
+
+Torula Yeast
+Varieties: Torula Yeast (Standard), Torula Yeast (Chromium-Enriched)
+
+Yeast Extract
+Varieties: Yeast Extract (Standard), Yeast Extract (Autolyzed), Yeast Extract (Low Sodium)
+
+Yeast Cell Wall
+Varieties: Yeast Cell Wall (Standard), Yeast Cell Wall (HP MOS)
+
+Autolyzed Yeast
+Varieties: Autolyzed Yeast (Standard), Autolyzed Yeast (Spray-Dried)
+
+SCP from Methane (Calysta FeedKind)
+Varieties: FeedKind (Calysta SCP), FeedKind (Natural Gas-derived)
+
+SCP from CO2 (Solar Foods Solein)
+Varieties: Solein (Solar Foods), Solein (CO2-derived)
+
+Fermented Soybean Meal
+Varieties: Fermented SBM (Standard), Fermented SBM (HP, 55% CP)
+
+Mycoprotein (Quorn)
+Varieties: Mycoprotein Quorn (Standard), Mycoprotein (Fusarium venenatum)
+
+DDGS (Corn, Distillers Dried Grains with Solubles)
+Varieties: DDGS Corn (Standard 27% CP), DDGS Corn (HP 30% CP), DDGS Corn (Low Fat)
+
+DDGS (Wheat)
+Varieties: DDGS Wheat (Standard), DDGS Wheat (HP)
+
+DDGS (Barley)
+Varieties: DDGS Barley (Standard), DDGS Barley (HP)
+
+Wet Distillers Grains
+Varieties: Wet Distillers Grains (WDG), Wet DG with Solubles (WDGS)
+
+Black Soldier Fly Larvae Meal (BSFL)
+Varieties: BSFL Meal (Standard 40% CP), BSFL Meal (Full-Fat 50% CP), BSFL Meal (Defatted 55% CP)
+
+Mealworm Meal (Tenebrio molitor)
+Varieties: Mealworm Meal (Standard 53% CP), Mealworm Meal (Defatted 60% CP)
+
+Cricket Meal
+Varieties: Cricket Meal (Standard), Cricket Meal (Dried/Ground)
+
+Housefly Larvae Meal
+Varieties: Housefly Larvae Meal (Standard)
+
+BSFL Oil
+Varieties: BSFL Oil (Crude), BSFL Oil (Refined), BSFL Oil (Lauric Acid Enriched)
+
+Mealworm Oil
+Varieties: Mealworm Oil (Crude), Mealworm Oil (Refined)
+
+Duckweed Meal
+Varieties: Duckweed Meal (Lemna), Duckweed Meal (Wolffia), Duckweed Meal (Spirodela)
+
+Moringa Leaf Meal
+Varieties: Moringa Leaf Meal (M. oleifera), Moringa Seed Cake
+
+Hemp Protein Meal
+Varieties: Hemp Protein Meal (40% CP), Hemp Protein Meal (50% CP)
+
+Chickpea Protein
+Varieties: Chickpea Protein Concentrate (65%), Chickpea Protein Isolate (80%)
+
+Precision Fermentation Protein
+Varieties: Precision Fermentation Protein (Yeast Platform), PF Protein (Bacterial Platform)
+
+Cell-Cultured Protein
+Varieties: Cell-Cultured Protein (Avian), Cell-Cultured Protein (Porcine), Cell-Cultured Protein (Bovine)
+
+Turmeric Powder
+Varieties: Turmeric (Curcuma longa), Turmeric (High Curcumin >5%), Turmeric (Organic)
+
+Black Pepper
+Varieties: Black Pepper (Piper nigrum), Black Pepper (White), Black Pepper (Long)
+
+Chili / Capsicum
+Varieties: Chili Powder (Cayenne), Capsicum Oleoresin, Chili (Bird's Eye)
+
+Ginger Powder
+Varieties: Ginger Powder (Zingiber officinale), Ginger Oleoresin
+
+Garlic Powder
+Varieties: Garlic Powder (Standard), Garlic Granules, Garlic Oil
+
+Cinnamon Powder
+Varieties: Cinnamon (Cassia), Cinnamon (Ceylon), Cinnamon (Saigon)
+
+Cumin / Jeera
+Varieties: Cumin (Black Jeera), Cumin (White Jeera), Cumin (Seed)
+
+Oregano Powder
+Varieties: Oregano (Origanum vulgare), Oregano (Mexican), Oregano (Greek)
+
+Thyme Powder
+Varieties: Thyme Powder (Thymus vulgaris), Thyme Powder (Organic)
+
+Rosemary Extract
+Varieties: Rosemary Extract (Liquid), Rosemary Extract (Powder)
+
+Thymol
+Varieties: Thymol (Standard 98%), Thymol (Pharma Grade)
+
+Carvacrol
+Varieties: Carvacrol (Standard 85%), Carvacrol (HP 98%)
+
+Cinnamaldehyde
+Varieties: Cinnamaldehyde (Standard 95%), Cinnamaldehyde (Pharma Grade)
+
+Saponins (Yucca Extract)
+Varieties: Saponins Yucca schidigera (Standard), Yucca Extract (Liquid)
+
+Polyphenols (Grape Seed Extract)
+Varieties: Grape Seed Extract (OPC 95%), Pomegranate Polyphenol, Resveratrol
+
+Dried Brewers Grains
+Varieties: Dried Brewers Grains (Standard 27% CP), DBG (Low Fat)
+
+Wet Brewers Grains
+Varieties: Wet Brewers Grains (Standard), Wet BG (Ensiled)
+
+Brewers Yeast (Dried)
+Varieties: Brewers Yeast Dried (Standard), Brewers Yeast Debittered, Brewers Yeast Autolyzed
+
+Hops Residue
+Varieties: Hops Residue (Spent Hops), Hops Pellet Residue
+
+Malt Culms / Sprouts
+Varieties: Malt Culms (Standard), Malt Sprouts (Dried)
+
+Coffee Husks
+Varieties: Coffee Husks (Dried), Coffee Husks (Ground)
+
+Cocoa Husks
+Varieties: Cocoa Husks (Dried), Cocoa Shell Meal
+
+Cocoa Pod Husk
+Varieties: Cocoa Pod Husk (Dried), Cocoa Pod Husk (Fermented)
+
+Tea Waste / Grounds
+Varieties: Tea Waste (Green Tea), Tea Waste (Black Tea), Tea Grounds
+
+Bakery Meal / Waste
+Varieties: Bakery Meal (Standard), Bakery Meal (Low Fat), Bakery Meal (High Sugar)
+
+Bread Crumbs
+Varieties: Bread Crumbs (Standard), Bread Crumbs (Fine), Bread Crumbs (Toasted)
+
+Cookie / Biscuit Waste
+Varieties: Cookie Waste (Standard), Biscuit Waste (Cream Filled)
+
+Pasta Waste
+Varieties: Pasta Waste (Wheat), Pasta Waste (Semolina)
+
+Acid Oil / Fatty Acid Distillate
+Varieties: Acid Oil (Soy), Acid Oil (Palm), Acid Oil (Blend), Fatty Acid Distillate (Palm)
+
+Soap Stock
+Varieties: Soap Stock (Soy), Soap Stock (Palm), Soap Stock (Sunflower)
+
+Glycerol / Glycerine (Crude)
+Varieties: Crude Glycerol (80%), Crude Glycerol (88%), Crude Glycerol (Biodiesel)
+
+Refined Glycerine
+Varieties: Refined Glycerine (99.5%), Refined Glycerine (USP Grade)
+
+Corn Steep Liquor
+Varieties: Corn Steep Liquor (Standard), CSL (Low Lactic Acid), CSL (Concentrated)
+
+Corn Fiber
+Varieties: Corn Fiber (Standard), Corn Fiber (Modified)
+
+Modified Starch
+Varieties: Modified Starch (Waxy Maize), Modified Starch (Potato), Modified Starch (Tapioca)
+
+Astaxanthin (Synthetic)
+Varieties: Astaxanthin Synthetic (10%), Astaxanthin Synthetic (5%)
+
+Astaxanthin (Natural, Haematococcus)
+Varieties: Astaxanthin Natural (Haematococcus pluvialis 2%), Astaxanthin Natural (5%)
+
+Canthaxanthin
+Varieties: Canthaxanthin (10%), Canthaxanthin (1% diluted)
+
+Lutein
+Varieties: Lutein (Marigold extract 5%), Lutein (Saponified 20%)
+
+Beta-Carotene
+Varieties: Beta-Carotene (1% diluted), Beta-Carotene (10%), Beta-Carotene (Natural)
+
+Nucleotides (Feed Grade)
+Varieties: Nucleotides (Standard Feed Grade), Nucleotides (HP Aqua Grade)
+
+Garlic Extract (Allicin)
+Varieties: Garlic Extract Allicin (Standard), Garlic Extract (Stabilized)
+
+Beta-Glucan (Yeast)
+Varieties: Beta-Glucan Yeast (Standard), Beta-Glucan (HP Yeast)
+
+Vitamin C (Stabilized)
+Varieties: Vitamin C Stabilized (Ascorbyl Polyphosphate), Vitamin C (Monophosphate)
+
+Organic Selenium
+Varieties: Organic Selenium (Selenomethionine), Organic Se (Yeast-bound)
+
+Carrageenan
+Varieties: Carrageenan (Kappa), Carrageenan (Iota)
+
+Guar Gum
+Varieties: Guar Gum (Regular), Guar Gum (Fast-Hydrating)
+
+Wheat Gluten (Vital)
+Varieties: Wheat Gluten Vital (Standard), Wheat Gluten Vital (HP)
+
+CMC
+Varieties: CMC (Low Viscosity), CMC (High Viscosity)
+
+Modified Starch (Waxy Maize)
+Varieties: Modified Starch Waxy Maize (Standard), Waxy Maize (Pregelatinized)
+
+Choline Chloride
+Varieties: Choline Chloride (60% on carrier), Choline Chloride (50% liquid)
+
+Inositol
+Varieties: Inositol (Feed Grade), Inositol (Pharm Grade)
+
+Taurine
+Varieties: Taurine (Feed Grade 99%), Taurine (Synthetic 99%)
+
+</user_query>

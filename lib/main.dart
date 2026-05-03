@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'Core/Routes/app_pages.dart';
-import 'Core/Routes/app_routes.dart';
-import 'Core/Theme/app_theme.dart';
-import 'Core/Theme/theme_service.dart';
 
-void main() async {
+import 'package:agri_market/core/routes/app_pages.dart';
+import 'package:agri_market/core/routes/app_routes.dart';
+import 'package:agri_market/core/theme/app_theme.dart';
+
+// ═══ Launch (only flags here; all routes stay in [AppPages.pages] — not removed) ═══
+/// `true` — cold start opens buyer home directly.
+/// `false` — start at [AppRoutes.login] (auth first).
+const bool kLaunchOpenBuyerHome = true;
+
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Get.putAsync(() => ThemeService().init());
-  runApp(const MyApp());
+  runApp(const AgriMarketApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AgriMarketApp extends StatelessWidget {
+  const AgriMarketApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: 'Agri Market',
       debugShowCheckedModeBanner: false,
-      title: 'AgriMarket',
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeService.to.mode,
-      initialRoute: AppRoutes.login,
+      themeMode: ThemeMode.light,
+      initialRoute: kLaunchOpenBuyerHome
+          ? AppRoutes.buyerDashboard
+          : AppRoutes.login,
       getPages: AppPages.pages,
     );
   }
