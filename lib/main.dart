@@ -5,10 +5,10 @@ import 'package:agri_market/core/routes/app_pages.dart';
 import 'package:agri_market/core/routes/app_routes.dart';
 import 'package:agri_market/core/theme/app_theme.dart';
 
-// ═══ Launch (only flags here; all routes stay in [AppPages.pages] — not removed) ═══
-/// `true` — cold start opens buyer home directly.
-/// `false` — start at [AppRoutes.login] (auth first).
-const bool kLaunchOpenBuyerHome = true;
+// ═══ Launch — all routes stay in [AppPages.pages]; only [initialRoute] changes here ═══
+/// `true` — cold start opens [AppRoutes.buyerDashboard] (skip login screen).
+/// `false` — cold start at [AppRoutes.login]; buyer/seller/auth routes all navigable as usual.
+const bool kLaunchOpenBuyerHome = false;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
